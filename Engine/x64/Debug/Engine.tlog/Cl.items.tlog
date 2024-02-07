@@ -1,0 +1,11 @@
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Engine.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\Engine.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\pch.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\pch.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Assets\Audio.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\Audio.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Assets\DefaultShader.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\DefaultShader.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Assets\Geometry.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\Geometry.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Assets\Shader.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\Shader.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Camera.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\Camera.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Components\InterfaceComponent.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\InterfaceComponent.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Managers\ResourceManager.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\ResourceManager.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Objects\Actor.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\Actor.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Scenes\Scene.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\Scene.obj
