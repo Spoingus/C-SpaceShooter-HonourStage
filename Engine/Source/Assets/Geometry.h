@@ -35,6 +35,8 @@ public:
     std::vector<Mesh> meshes;
     
     Geometry();
+    Geometry(const std::string& filename) { LoadMesh(filename); }
+    
     void LoadMesh(const std::string& filename);
     void Draw();
 };

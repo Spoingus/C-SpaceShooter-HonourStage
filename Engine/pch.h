@@ -8,6 +8,12 @@
 #define PCH_H
 
 // add headers that you want to pre-compile here
-#include "framework.h"
-
+#include "Source/Camera.h"
+#include "Source/Assets/Audio.h"
+#include "Source/Assets/Geometry.h"
+#include "Source/Assets/Shader.h"
+#include "Source/Components/InterfaceComponent.h"
+#include "Source/Managers/ResourceManager.h"
+#include "Source/Objects/Actor.h"
+#include "Source/Scenes/Scene.h"
 #endif //PCH_H
