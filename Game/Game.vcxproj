@@ -140,7 +140,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Shaders\Fragment\" />
+    <Folder Include="Shaders\Vertex\" />
     <Folder Include="Source\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Geometry\BarrelsTest\BarrelBump.jpeg" />
+    <Content Include="Assets\Geometry\BarrelsTest\BarrelColour.jpeg" />
+    <Content Include="Assets\Geometry\BarrelsTest\BarrelSpecular.jpeg" />
+    <Content Include="Assets\Geometry\BarrelsTest\BarrelsTest.fbx" />
+    <Content Include="Assets\Geometry\BarrelsTest\BarrelsTest.mtl" />
+    <Content Include="Assets\Geometry\BarrelsTest\BarrelsTest.obj" />
+    <Content Include="f.fs" />
+    <Content Include="v.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

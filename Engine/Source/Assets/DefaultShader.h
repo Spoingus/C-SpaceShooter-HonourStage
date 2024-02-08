@@ -12,10 +12,10 @@ public:
     
     DefaultShader() : Shader("../Shaders/Vertex/DefaultVertex.vert", "../Shaders/Fragment/DefaultFragment.vert")
     {
-        view_matrix = glad_glGetUniformLocation(shader_id, "view");
-        projection_matrix = glad_glGetUniformLocation(shader_id, "projection");
-        camera_position = glad_glGetUniformLocation(shader_id, "camera_position");
+        //view_matrix = glad_glGetUniformLocation(shader_id, "view");
+        //projection_matrix = glad_glGetUniformLocation(shader_id, "projection");
+        //camera_position = glad_glGetUniformLocation(shader_id, "camera_position");
     }
 
-    void apply_shader(glm::mat4 model, Geometry geometry) override;
+    //void apply_shader(glm::mat4 model, Geometry geometry) override;
 };

@@ -171,10 +171,6 @@
     <ClCompile Include="Source\Objects\Actor.cpp" />
     <ClCompile Include="Source\Scenes\Scene.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Source\Shaders\Fragment\DefaultFragment.frag" />
-    <Content Include="Source\Shaders\Vertex\DefaultVertex.vert" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

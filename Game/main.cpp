@@ -2,6 +2,10 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
+#include "../Engine/Source/Assets/DefaultShader.h"
+#include "../Engine/Source/Assets/Geometry.h"
+#include "../Engine/Source/Assets/Shader.h"
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
@@ -37,7 +41,13 @@ int main()
         std::cout << "Failed to initialize GLAD" << '\n';
         return -1;
     }
+    glEnable(GL_DEPTH_TEST); // Enabling depth testing allows rear faces of 3D objects to be hidden behind front faces.
+    glEnable(GL_MULTISAMPLE); // Anti-aliasing
+    glEnable(GL_BLEND); // GL_BLEND for OpenGL transparency which is further set within the fragment shader. 
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	
 
+    Shader main_shader("v.vert","f.frag");
+    
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -50,6 +60,7 @@ int main()
         // ------
         glClearColor(0.3f, 0.2f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+        
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------

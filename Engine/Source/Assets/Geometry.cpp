@@ -135,9 +135,6 @@ void Geometry::LoadMesh(const std::string& filename)
 
 void Geometry::Draw()
 {
-	glClearColor(0.30f, 0.55f, 0.65f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	for (const auto mesh : meshes)
 	{
 		if (mesh.material.diffuse.id > 0) {

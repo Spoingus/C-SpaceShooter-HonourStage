@@ -3,7 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-void DefaultShader::apply_shader(glm::mat4 model, Geometry geometry)
+/*void DefaultShader::apply_shader(glm::mat4 model, Geometry geometry)
 {
     glUseProgram(shader_id);
     
@@ -18,4 +18,4 @@ void DefaultShader::apply_shader(glm::mat4 model, Geometry geometry)
  
     glm::mat4 projection = glm::perspective(glm::radians(55.0f), 1.0f, 0.1f, 100.0f);
     glUniformMatrix4fv(projection_matrix, 1, GL_FALSE, glm::value_ptr(projection));
-}
+}*/
