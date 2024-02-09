@@ -30,7 +30,31 @@ Geometry resource_manager::load_geometry(const std::string& filename)
 
 unsigned int resource_manager::load_texture(const std::string& filename)
 {
-    Texture texture;
+	// load and create a texture
+	unsigned int texture;
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	
+	// set the texture wrapping parameters / filtering parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	// load image, create texture and generate mipmaps
+	int width, height, nrChannels;
+	unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrChannels, 0);
+	if (data)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else { std::cout << "Failed to load texture" << std::endl; }
+	stbi_image_free(data);
+
+	texture_map.insert({filename, texture});
+	return texture;
+    /*Texture texture;
 	unsigned int textureID;
     
     const auto in_map = texture_map.find(filename);
@@ -72,33 +96,58 @@ unsigned int resource_manager::load_texture(const std::string& filename)
 		{ stbi_image_free(image_data); std::cout << "Image loading failed: " << filename << "\n"; }
     }
 	texture_map.insert({filename, textureID});
-	return textureID;
+	return textureID;*/
 }
 
-unsigned int resource_manager::load_shader(const std::string& shader_name, GLenum shader_type)
+unsigned int resource_manager::load_shader(const std::string& shader_path, GLenum shader_type)
 {
-    unsigned int shader;//Creates the shader to check for
-
-    const auto in_map = shader_map.find(shader_name);//Find method returns the end or location of the shader in the map
-    if(in_map == shader_map.end())//Checks to see if the shader is already loaded in the map using the map end
+    std::string s_shader_code;
+    std::ifstream shader_file;
+	
+    shader_file.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+    try 
     {
-        shader = glad_glCreateShader(shader_type);
-        
-        const std::ifstream shader_file (shader_name);
-        const char* shader_source;
-        if ( shader_file.is_open() )//While open the file will read everything to the shader source
-        {
-            std::stringstream b;
-            b << shader_file.rdbuf();
-            shader_source = b.str().c_str();//Converts it to a const char to be used in the glShaderSource
-        }
-        glad_glShaderSource(shader,1, &shader_source,nullptr);//Loads the shader source
-
-        glad_glCompileShader(shader);//Compiles the shader
-        shader_map.insert({shader_name,shader});//Adds the shader to the map
+        shader_file.open(shader_path);
+        std::stringstream shader_stream;
+        shader_stream << shader_file.rdbuf();
+        shader_file.close();
+        s_shader_code   = shader_stream.str();
     }
-    else
-        shader = in_map->second;//If the shader is in the map the value is set to that to be returned
-    
-    return shader; // Returns the newly created shader or the existing shader
+    catch (std::ifstream::failure& e)
+    {
+        std::cout << "SHADER_ERROR: FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
+    }
+    const char* c_shader_code = s_shader_code.c_str();
+
+    const unsigned int shader = glCreateShader(shader_type);
+    glShaderSource(shader, 1, &c_shader_code, nullptr);
+    glCompileShader(shader);
+    shader_compile_errors(shader, shader_path);
+
+	shader_map.insert({shader_path, shader});
+	return shader;
+}
+
+void resource_manager::shader_compile_errors(unsigned shader, std::string type)
+{
+	int success;
+	char infoLog[1024];
+	if (type != "PROGRAM")
+	{
+		glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+		if (!success)
+		{
+			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
+			std::cout << "SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+		}
+	}
+	else
+	{
+		glGetProgramiv(shader, GL_LINK_STATUS, &success);
+		if (!success)
+		{
+			glGetProgramInfoLog(shader, 1024, NULL, infoLog);
+			std::cout << "PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+		}
+	}
 }

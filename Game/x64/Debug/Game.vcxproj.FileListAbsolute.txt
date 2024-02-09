@@ -1,0 +1,2 @@
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\x64\Debug\Shaders\Fragment\fragment.glsl
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\x64\Debug\Shaders\Vertex\vertex.glsl

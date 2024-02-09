@@ -2,7 +2,7 @@
 #include <map>
 #include <string>
 #include <glad/glad.h>
-class Geometry;
+#include "../Assets/Geometry.h"
 
 namespace resource_manager
 {
@@ -17,7 +17,9 @@ namespace resource_manager
 
     unsigned int load_texture(const std::string& filename);
 
-    unsigned int load_shader(const std::string& shader_name, GLenum shader_type);
+    unsigned int load_shader(const std::string& shader_path, GLenum shader_type);
 
     unsigned int load_audio(const std::string& filename);
+
+    void shader_compile_errors(unsigned int shader, std::string type);
 }

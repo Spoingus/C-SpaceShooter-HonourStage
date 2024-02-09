@@ -140,8 +140,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Shaders\Fragment\" />
-    <Folder Include="Shaders\Vertex\" />
     <Folder Include="Source\" />
   </ItemGroup>
   <ItemGroup>
@@ -151,8 +149,12 @@
     <Content Include="Assets\Geometry\BarrelsTest\BarrelsTest.fbx" />
     <Content Include="Assets\Geometry\BarrelsTest\BarrelsTest.mtl" />
     <Content Include="Assets\Geometry\BarrelsTest\BarrelsTest.obj" />
-    <Content Include="f.fs" />
-    <Content Include="v.vs" />
+    <Content Include="Shaders\Fragment\fragment.glsl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Shaders\Vertex\vertex.glsl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
