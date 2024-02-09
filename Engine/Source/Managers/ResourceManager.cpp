@@ -49,7 +49,7 @@ unsigned int resource_manager::load_texture(const std::string& filename)
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
-	else { std::cout << "Failed to load texture" << std::endl; }
+	else { std::cout << "Failed to load texture:" << std::endl << "\n" << stbi_failure_reason(); }
 	stbi_image_free(data);
 
 	texture_map.insert({filename, texture});
