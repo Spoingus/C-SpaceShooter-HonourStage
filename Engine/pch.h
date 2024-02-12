@@ -14,6 +14,7 @@
 #include "Source/Assets/Shader.h"
 #include "Source/Components/InterfaceComponent.h"
 #include "Source/Managers/ResourceManager.h"
+#include "Source/Managers/SceneManager.h"
 #include "Source/Objects/Actor.h"
 #include "Source/Scenes/Scene.h"
 #endif //PCH_H

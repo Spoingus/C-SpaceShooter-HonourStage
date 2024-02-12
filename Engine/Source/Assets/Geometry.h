@@ -26,6 +26,7 @@ struct Mesh
     // handles to vao, vbo and ebo
     unsigned int vao_handle, vbo_vertices, vbo_texture_coords, vbo_normals, ebo_handle;
     Material material;
+    std::string directory;
 };
 
 class Geometry

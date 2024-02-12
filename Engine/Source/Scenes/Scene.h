@@ -2,8 +2,20 @@
 
 class Scene
 {
+protected:
+    
+    SceneManager scene_manager;
+    
 public:
-    void Render();
-    void Update();
-    void Close();
+
+    static float dt = 0;
+
+    static Camera camera;
+    
+    virtual ~Scene() = default;
+    Scene(SceneManager scene_manager);
+    
+    virtual void Render();
+    virtual void Update();
+    virtual void Close();
 };
