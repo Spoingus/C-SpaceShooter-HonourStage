@@ -1,6 +1,6 @@
 ﻿#include "GameScene.h"
 
-GameScene::GameScene()
+void GameScene::Update()
 {
-    dt = 8;
+    delta_time += 1;
 }

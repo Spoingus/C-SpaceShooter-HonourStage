@@ -4,5 +4,8 @@
 class GameScene : Scene
 {
 public:
-    GameScene();
+    ~GameScene() override;
+    void Render() override;
+    void Update() override;
+    void Close() override;
 };

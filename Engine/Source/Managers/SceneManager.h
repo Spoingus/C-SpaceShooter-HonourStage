@@ -1,11 +1,13 @@
 ﻿#pragma once
+#include "../Scenes/Scene.h"
 
-class Scene;
-
-class SceneManager
+namespace  scene_manager
 {
-public:
+    static Scene current_scene;
+    static Scene previous_scene;
+    
     static int width = 1920, height = 1080;
 
-    void ChangeScene(Scene scene_type);
-};
+    static void ChangeScene(Scene scene_type);
+    static void PreviousScene();
+}

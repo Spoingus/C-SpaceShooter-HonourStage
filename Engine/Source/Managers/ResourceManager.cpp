@@ -54,49 +54,6 @@ unsigned int resource_manager::load_texture(const std::string& filename)
 
 	texture_map.insert({filename, texture});
 	return texture;
-    /*Texture texture;
-	unsigned int textureID;
-    
-    const auto in_map = texture_map.find(filename);
-    if(in_map == texture_map.end())
-    {
-	    const std::size_t position = filename.find_last_of('\\');
-	    const std::string filepath = "Textures\\" + filename.substr(position + 1);
- 
-		int width, height, channels;
-		unsigned char* image_data = stbi_load(filepath.c_str(), &width, &height, &channels, 0);
-    	
-		glGenTextures(1, &textureID);
- 
-		if (image_data)
-		{
-			GLenum format{};
- 
-			if (channels == 1)
-				format = GL_RED;
-			else if (channels == 3)
-				format = GL_RGB;
-			else if (channels == 4)
-				format = GL_RGBA;
- 
-			glBindTexture(GL_TEXTURE_2D, textureID);
-			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
- 
-			glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, image_data);
-			glGenerateMipmap(GL_TEXTURE_2D);
-			
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
-			
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			std::cout << "Image loaded successfully: " << filename << "\n";
-		}
-		else
-		{ stbi_image_free(image_data); std::cout << "Image loading failed: " << filename << "\n"; }
-    }
-	texture_map.insert({filename, textureID});
-	return textureID;*/
 }
 
 unsigned int resource_manager::load_shader(const std::string& shader_path, GLenum shader_type)

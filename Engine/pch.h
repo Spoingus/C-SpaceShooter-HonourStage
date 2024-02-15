@@ -12,7 +12,7 @@
 #include "Source/Assets/Audio.h"
 #include "Source/Assets/Geometry.h"
 #include "Source/Assets/Shader.h"
-#include "Source/Components/InterfaceComponent.h"
+#include "Source\Components\Component.h"
 #include "Source/Managers/ResourceManager.h"
 #include "Source/Managers/SceneManager.h"
 #include "Source/Objects/Actor.h"
