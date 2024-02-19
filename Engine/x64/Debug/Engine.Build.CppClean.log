@@ -4,8 +4,9 @@ c:\users\jackb\downloads\c-spaceshooter-honourstage\x64\debug\engine.idb
 c:\users\jackb\downloads\c-spaceshooter-honourstage\engine\x64\debug\pch.obj
 c:\users\jackb\downloads\c-spaceshooter-honourstage\engine\x64\debug\scene.obj
 c:\users\jackb\downloads\c-spaceshooter-honourstage\engine\x64\debug\actor.obj
+c:\users\jackb\downloads\c-spaceshooter-honourstage\engine\x64\debug\scenemanager.obj
 c:\users\jackb\downloads\c-spaceshooter-honourstage\engine\x64\debug\resourcemanager.obj
-c:\users\jackb\downloads\c-spaceshooter-honourstage\engine\x64\debug\interfacecomponent.obj
+c:\users\jackb\downloads\c-spaceshooter-honourstage\engine\x64\debug\component.obj
 c:\users\jackb\downloads\c-spaceshooter-honourstage\engine\x64\debug\camera.obj
 c:\users\jackb\downloads\c-spaceshooter-honourstage\engine\x64\debug\shader.obj
 c:\users\jackb\downloads\c-spaceshooter-honourstage\engine\x64\debug\geometry.obj

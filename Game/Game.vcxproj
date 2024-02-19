@@ -141,6 +141,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Geometry\Backpack\ao.jpg" />
+    <Content Include="Assets\Geometry\Backpack\backpack.mtl" />
+    <Content Include="Assets\Geometry\Backpack\backpack.obj" />
+    <Content Include="Assets\Geometry\Backpack\diffuse.jpg" />
+    <Content Include="Assets\Geometry\Backpack\normal.png" />
+    <Content Include="Assets\Geometry\Backpack\roughness.jpg" />
+    <Content Include="Assets\Geometry\Backpack\source_attribution.txt" />
+    <Content Include="Assets\Geometry\Backpack\specular.jpg" />
     <Content Include="Assets\Geometry\BarrelsTest\BarrelBump.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -159,6 +167,9 @@
     <Content Include="Assets\Geometry\BarrelsTest\BarrelsTest.obj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Geometry\SkySphere\Sky.png" />
+    <Content Include="Assets\Geometry\SkySphere\SkySphere.mtl" />
+    <Content Include="Assets\Geometry\SkySphere\SkySphere.obj" />
     <Content Include="Shaders\Fragment\fragment.glsl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

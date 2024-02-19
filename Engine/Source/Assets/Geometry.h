@@ -10,14 +10,12 @@ struct Texture
     unsigned int id;
     std::string image_name;
 };
-
 struct Material
 {
     Texture diffuse;
     Texture normal;
     Texture specular;
 };
-
 struct Mesh
 {
     std::vector<glm::vec3> position, normal, tangent, bi_tangent;
@@ -40,4 +38,8 @@ public:
     
     void LoadMesh(const std::string& filename);
     void Draw();
+
+private:
+    
+    void setup_mesh(unsigned int i);
 };

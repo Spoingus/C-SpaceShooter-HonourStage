@@ -19,7 +19,6 @@ void Geometry::LoadMesh(const std::string& filename)
         aiProcess_CalcTangentSpace |
         aiProcess_Triangulate |
         aiProcess_FlipUVs |
-        aiProcess_GenNormals |
         aiProcess_JoinIdenticalVertices);
 
     if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
@@ -29,18 +28,17 @@ void Geometry::LoadMesh(const std::string& filename)
     }
 	
     mesh_index = scene->mNumMeshes;
+	std::cout << scene->mNumMeshes;
     meshes.resize(mesh_index);
-
-    const aiMesh* mesh{};
 
     for (unsigned int i = 0; i < mesh_index; ++i)
     {
     	// retrieve the directory path of the filepath
     	meshes[i].directory = filename.substr(0, filename.find_last_of('/'));
     	
-	    mesh = scene->mMeshes[i];
+	    const aiMesh* mesh = scene->mMeshes[i];
 	    const aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-        	
+    	
 	    // Diffuse Texture Loop
 	    for (unsigned int i_diffuse = 0; i_diffuse < material->GetTextureCount(aiTextureType_DIFFUSE); ++i_diffuse) // Only using: aiTextureType_DIFFUSE
 	    {
@@ -68,26 +66,32 @@ void Geometry::LoadMesh(const std::string& filename)
 		    meshes[i].material.specular.id = specular_handle;
 		    meshes[i].material.specular.image_name = tex_name.C_Str();
 	    }
+    	
 	    //Loop through each of the vertices and add their positions / normals / texture coordinates
-	    for (unsigned int i_vert = 0; i_vert < mesh->mNumVertices; ++i_vert)
+	    for (unsigned int i2 = 0; i2 < mesh->mNumVertices; ++i2)
 	    {
 		    glm::vec3 position{};
-		    position.x = mesh->mVertices[i_vert].x;
-		    position.y = mesh->mVertices[i_vert].y;
-		    position.z = mesh->mVertices[i_vert].z;
+		    position.x = mesh->mVertices[i2].x;
+		    position.y = mesh->mVertices[i2].y;
+		    position.z = mesh->mVertices[i2].z;
 		    meshes[i].position.push_back(position);
-				
-		    glm::vec3 normal{};
-		    normal.x = mesh->mNormals[i_vert].x;
-		    normal.y = mesh->mNormals[i_vert].y;
-		    normal.z = mesh->mNormals[i_vert].z;
-		    meshes[i].normal.push_back(normal);
-
+	    	
+	    	if (mesh->HasNormals())
+	    	{
+	    		glm::vec3 normal{};
+	    		normal.x = mesh->mNormals[i2].x;
+	    		normal.y = mesh->mNormals[i2].y;
+	    		normal.z = mesh->mNormals[i2].z;
+	    		meshes[i].normal.push_back(normal);
+	    	}
+		    else
+		    	meshes[i].normal.push_back(glm::vec3(0.0f, 0.0f, 0.0f));
+	    	
 		    if (mesh->HasTextureCoords(0))
 		    {
 			    glm::vec2 tex_coords{};
-			    tex_coords.x = mesh->mTextureCoords[0][i_vert].x;
-			    tex_coords.y = mesh->mTextureCoords[0][i_vert].y;
+			    tex_coords.x = mesh->mTextureCoords[0][i2].x;
+			    tex_coords.y = mesh->mTextureCoords[0][i2].y;
 			    meshes[i].tex_coords.push_back(tex_coords);
 		    }
 		    else
@@ -98,39 +102,8 @@ void Geometry::LoadMesh(const std::string& filename)
 		    for (unsigned int i4 = 0; i4 < mesh->mFaces[i3].mNumIndices; ++i4)										
 			    meshes[i].indices.push_back(mesh->mFaces[i3].mIndices[i4]);
 
-        	
-	    // VAO,VBO and EBO setup
-	    glad_glGenVertexArrays(1, &meshes[i].vao_handle);
-	    glad_glGenBuffers(1, &meshes[i].vbo_vertices);
-	    glad_glGenBuffers(1, &meshes[i].vbo_normals);
-	    glad_glGenBuffers(1, &meshes[i].vbo_texture_coords);
-	    glGenBuffers(1, &meshes[i].ebo_handle);
- 
-	    glBindVertexArray(meshes[i].vao_handle);	
- 
-	    // Vertex Positions
-	    glBindBuffer(GL_ARRAY_BUFFER, meshes[i].vbo_vertices);
-	    glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * meshes[i].position.size(), &meshes[i].position[0], GL_STATIC_DRAW);
-	    glEnableVertexAttribArray(0);
-	    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), static_cast<void*>(nullptr));
-		
-	    // Vertex Normals
-	    glBindBuffer(GL_ARRAY_BUFFER, meshes[i].vbo_normals);
-	    glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * meshes[i].normal.size(), &meshes[i].normal[0], GL_STATIC_DRAW);
-	    glEnableVertexAttribArray(1);
-	    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), static_cast<void*>(nullptr));
- 
-	    // Texture Coordinates
-	    glBindBuffer(GL_ARRAY_BUFFER, meshes[i].vbo_texture_coords);
-	    glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2) * meshes[i].tex_coords.size(), meshes[i].tex_coords.data(), GL_STATIC_DRAW);
-	    glEnableVertexAttribArray(2);
-	    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), static_cast<void*>(nullptr));
-		
-	    // Indices
-	    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, meshes[i].ebo_handle);
-	    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * meshes[i].indices.size(), meshes[i].indices.data(), GL_STATIC_DRAW);
- 
-	    glBindVertexArray(0);
+    	setup_mesh(i);
+	    
     }
 }
 
@@ -149,7 +122,44 @@ void Geometry::Draw()
 			glActiveTexture(GL_TEXTURE2); glBindTexture(GL_TEXTURE_2D, mesh.material.specular.id); }
  
 		glBindVertexArray(mesh.vao_handle);
-		glDrawElements(GL_TRIANGLES, (GLsizei)mesh.indices.size(), GL_UNSIGNED_INT, nullptr);
+		glDrawElements(GL_TRIANGLES, (GLsizei)mesh.indices.size(), GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
+		glActiveTexture(GL_TEXTURE0);
 	}
+}
+
+void Geometry::setup_mesh(unsigned int i)
+{
+	// VAO,VBO and EBO setup
+	glGenVertexArrays(1, &meshes[i].vao_handle);
+	glGenBuffers(1, &meshes[i].vbo_vertices);
+	glGenBuffers(1, &meshes[i].vbo_normals);
+	glGenBuffers(1, &meshes[i].vbo_texture_coords);
+	glGenBuffers(1, &meshes[i].ebo_handle);
+ 
+	glBindVertexArray(meshes[i].vao_handle);
+ 
+	// Vertex Positions
+	glBindBuffer(GL_ARRAY_BUFFER, meshes[i].vbo_vertices);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * meshes[i].position.size(), &meshes[i].position[0], GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+		
+	// Vertex Normals
+	glBindBuffer(GL_ARRAY_BUFFER, meshes[i].vbo_vertices);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * meshes[i].normal.size(), &meshes[i].normal[0], GL_STATIC_DRAW);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+ 
+	// Texture Coordinates
+	glBindBuffer(GL_ARRAY_BUFFER, meshes[i].vbo_texture_coords);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2) * meshes[i].tex_coords.size(), &meshes[i].tex_coords[0], GL_STATIC_DRAW);
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+		
+	// Indices
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, meshes[i].ebo_handle);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * meshes[i].indices.size(), &meshes[i].indices[0], GL_STATIC_DRAW);
+ 
+	glBindVertexArray(0);
 }

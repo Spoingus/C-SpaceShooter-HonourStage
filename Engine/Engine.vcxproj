@@ -148,6 +148,8 @@
     <ClInclude Include="Source\Assets\Geometry.h">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </ClInclude>
+    <ClInclude Include="Source\Assets\Mesh.h" />
+    <ClInclude Include="Source\Assets\Model.h" />
     <ClInclude Include="Source\Assets\Shader.h" />
     <ClInclude Include="Source\Camera.h">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
