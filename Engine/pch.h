@@ -10,7 +10,7 @@
 // add headers that you want to pre-compile here
 #include "Source/Camera.h"
 #include "Source/Assets/Audio.h"
-#include "Source/Assets/Geometry.h"
+//#include "Source/Assets/Geometry.h"
 #include "Source/Assets/Shader.h"
 #include "Source\Components\Component.h"
 #include "Source/Managers/ResourceManager.h"

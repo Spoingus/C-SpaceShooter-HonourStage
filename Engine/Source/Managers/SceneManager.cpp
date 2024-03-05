@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
 #include "SceneManager.h"
 
-void scene_manager::ChangeScene(Scene scene_type)
+void scene_manager::ChangeScene(Scene* scene_type)
 {
     current_scene = scene_type;
 }

@@ -145,9 +145,6 @@
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="Source\Assets\Audio.h" />
-    <ClInclude Include="Source\Assets\Geometry.h">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </ClInclude>
     <ClInclude Include="Source\Assets\Mesh.h" />
     <ClInclude Include="Source\Assets\Model.h" />
     <ClInclude Include="Source\Assets\Shader.h" />
@@ -168,7 +165,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\Assets\Audio.cpp" />
-    <ClCompile Include="Source\Assets\Geometry.cpp" />
+    <ClCompile Include="Source\Assets\Mesh.cpp" />
+    <ClCompile Include="Source\Assets\Model.cpp" />
     <ClCompile Include="Source\Assets\Shader.cpp" />
     <ClCompile Include="Source\Camera.cpp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

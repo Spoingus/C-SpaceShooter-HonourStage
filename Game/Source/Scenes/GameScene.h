@@ -1,10 +1,16 @@
 ﻿#pragma once
 #include "../../../Engine/Source/Scenes/Scene.h"
+#include "../../Engine/Source/Assets/Shader.h"
+#include "../../Engine/Source/Assets/Model.h"
 
-class GameScene : Scene
+class GameScene : public Scene
 {
 public:
-    ~GameScene() override;
+    Shader default_shader;
+    Model guitar_backpack;
+    
+    ~GameScene() override = default;
+    GameScene(unsigned int in_width, unsigned int in_height);
     void Render() override;
     void Update() override;
     void Close() override;
