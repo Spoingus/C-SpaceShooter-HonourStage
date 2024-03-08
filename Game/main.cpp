@@ -3,6 +3,7 @@
 
 #include "../Engine/Source/Assets/Shader.h"
 #include "../Engine/Source/Assets/Model.h"
+#include "../Engine/Source/Managers/SceneManager.h"
 
 #include "Source/Scenes/GameScene.h"
 
@@ -25,23 +26,26 @@ float lastFrame = 0.0f;
 
 int main()
 {
+    auto& scene_manager = SceneManager::get();
     //Load scene and check for GLFW / GLAD errors
     GameScene game(SCR_WIDTH, SCR_HEIGHT);
-    if (game.loading_failed) return -1;
-    glfwSetCursorPosCallback(game.scene_window, mouse_callback);
-    glfwSetScrollCallback(game.scene_window, scroll_callback);
+    scene_manager.set_scene(&game);
+    
+    if (scene_manager.current_scene->loading_failed) return -1;
+    glfwSetCursorPosCallback(scene_manager.current_scene->scene_window, mouse_callback);
+    glfwSetScrollCallback(scene_manager.current_scene->scene_window, scroll_callback);
     
     // render loop
     // -----------
-    while (!glfwWindowShouldClose(game.scene_window))
+    while (!glfwWindowShouldClose(scene_manager.current_scene->scene_window))
     {
-        game.Update();
+        scene_manager.current_scene->Update();
         
-        game.Render();
+        scene_manager.current_scene->Render();
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
-        glfwSwapBuffers(game.scene_window);
+        glfwSwapBuffers(scene_manager.current_scene->scene_window);
         glfwPollEvents();
     }
 

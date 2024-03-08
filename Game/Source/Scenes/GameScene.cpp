@@ -2,7 +2,7 @@
 
 GameScene::GameScene(const unsigned int in_width, const unsigned int in_height): Scene(in_width, in_height),
     default_shader("Shaders/Vertex/vertex.glsl", "Shaders/Fragment/fragment.glsl"),
-    guitar_backpack("Assets/Geometry/Backpack/backpack.obj")
+    guitar_backpack("Assets/Geometry/SkySphere/SkySphere.obj")
 {
     //default_shader = Shader("Shaders/Vertex/vertex.glsl", "Shaders/Fragment/fragment.glsl");
     //guitar_backpack = Model("Assets/Geometry/Backpack/backpack.obj");

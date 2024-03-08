@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 
 #include "../../Source/Camera.h"
+#include "../Managers/SceneManager.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
@@ -13,6 +14,8 @@ class Scene
 public:
     //Scene window
     GLFWwindow* scene_window;
+    //Scene Manager
+    SceneManager* scene_manager;
     //Bool to check scene loading
     bool loading_failed = false;
     //Screen width / height

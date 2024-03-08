@@ -156,6 +156,7 @@
     <ClInclude Include="Source\Managers\SceneManager.h" />
     <ClInclude Include="Source\Objects\Actor.h" />
     <ClInclude Include="Source\Scenes\Scene.h" />
+    <ClInclude Include="Source\Singleton.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -176,6 +177,7 @@
     <ClCompile Include="Source\Managers\SceneManager.cpp" />
     <ClCompile Include="Source\Objects\Actor.cpp" />
     <ClCompile Include="Source\Scenes\Scene.cpp" />
+    <ClCompile Include="Source\Singleton.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
