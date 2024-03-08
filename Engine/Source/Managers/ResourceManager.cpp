@@ -8,14 +8,14 @@
 #include "stb_image.h"
 #include "../Assets/Model.h"
 
-void resource_manager::remove_all_assets()
+/*void ResourceManager::remove_all_assets()
 {
     model_map.clear();
     texture_map.clear();
     shader_map.clear();
-}
+}*/
 
-Mesh resource_manager::processMesh(aiMesh* mesh, const aiScene* scene, const std::string &directory)
+Mesh ResourceManager::processMesh(aiMesh* mesh, const aiScene* scene, const std::string &directory)
 {
 	// data to fill
     std::vector<Vertex> vertices;
@@ -93,7 +93,7 @@ Mesh resource_manager::processMesh(aiMesh* mesh, const aiScene* scene, const std
 	return Mesh(vertices, indices, textures);
 }
 
-bool resource_manager::model_loaded(const std::string& directory)
+bool ResourceManager::model_loaded(const std::string& directory)
 {
 	const auto in_map = model_map.find(directory);
 	if(in_map != model_map.end())
@@ -103,17 +103,17 @@ bool resource_manager::model_loaded(const std::string& directory)
 	return false;
 }
 
-void resource_manager::model_to_map(Model *model, const std::string& directory)
+void ResourceManager::model_to_map(Model *model, const std::string& directory)
 {
 	model_map.insert({directory, *model});
 }
 
-std::vector<Mesh> resource_manager::get_existing_meshes(const std::string& directory)
+std::vector<Mesh> ResourceManager::get_existing_meshes(const std::string& directory)
 {
 	return model_map.at(directory).meshes;
 }
 
-std::vector<Texture> resource_manager::load_material_textures(const aiMaterial* mat, const aiTextureType type, const std::string& type_name, const std::string& directory)
+std::vector<Texture> ResourceManager::load_material_textures(const aiMaterial* mat, const aiTextureType type, const std::string& type_name, const std::string& directory)
 {
 	std::vector<Texture> textures;
 	for(unsigned int i = 0; i < mat->GetTextureCount(type); i++)
@@ -140,7 +140,7 @@ std::vector<Texture> resource_manager::load_material_textures(const aiMaterial* 
 	return textures;
 }
 
-unsigned resource_manager::texture_from_file(const char* path, const std::string& directory)
+unsigned ResourceManager::texture_from_file(const char* path, const std::string& directory)
 {
 	std::string filename = std::string(path);
 	filename = directory + '/' + filename;
@@ -180,7 +180,7 @@ unsigned resource_manager::texture_from_file(const char* path, const std::string
 	return textureID;
 }
 
-unsigned int resource_manager::load_shader(const std::string& shader_path, GLenum shader_type)
+unsigned int ResourceManager::load_shader(const std::string& shader_path, GLenum shader_type)
 {
     std::string s_shader_code;
     std::ifstream shader_file;
@@ -205,11 +205,11 @@ unsigned int resource_manager::load_shader(const std::string& shader_path, GLenu
     glCompileShader(shader);
     shader_compile_errors(shader, shader_path);
 
-	shader_map.insert({shader_path, shader});
+    shader_map.insert({shader_path, shader});
 	return shader;
 }
 
-void resource_manager::shader_compile_errors(unsigned shader, std::string type)
+void ResourceManager::shader_compile_errors(unsigned shader, std::string type)
 {
 	int success;
 	char infoLog[1024];
