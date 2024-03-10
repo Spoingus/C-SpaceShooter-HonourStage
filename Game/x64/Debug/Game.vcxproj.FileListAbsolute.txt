@@ -1,8 +1,0 @@
-A:\C-SpaceShooter-HonourStage\x64\Debug\Assets\Geometry\BarrelsTest\BarrelBump.jpeg
-A:\C-SpaceShooter-HonourStage\x64\Debug\Assets\Geometry\BarrelsTest\BarrelColour.jpeg
-A:\C-SpaceShooter-HonourStage\x64\Debug\Assets\Geometry\BarrelsTest\BarrelSpecular.jpeg
-A:\C-SpaceShooter-HonourStage\x64\Debug\Assets\Geometry\BarrelsTest\BarrelsTest.fbx
-A:\C-SpaceShooter-HonourStage\x64\Debug\Assets\Geometry\BarrelsTest\BarrelsTest.mtl
-A:\C-SpaceShooter-HonourStage\x64\Debug\Assets\Geometry\BarrelsTest\BarrelsTest.obj
-A:\C-SpaceShooter-HonourStage\x64\Debug\Shaders\Fragment\fragment.glsl
-A:\C-SpaceShooter-HonourStage\x64\Debug\Shaders\Vertex\vertex.glsl
