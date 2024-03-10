@@ -9,7 +9,6 @@
 
 //void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput(GLFWwindow *window);
 
 // settings
@@ -30,22 +29,25 @@ int main()
     //Load scene and check for GLFW / GLAD errors
     GameScene game(SCR_WIDTH, SCR_HEIGHT);
     scene_manager.set_scene(&game);
+
+    auto& scene = scene_manager.current_scene;
     
-    if (scene_manager.current_scene->loading_failed) return -1;
+    if (scene->loading_failed) return -1;
     glfwSetCursorPosCallback(scene_manager.current_scene->scene_window, mouse_callback);
-    glfwSetScrollCallback(scene_manager.current_scene->scene_window, scroll_callback);
     
     // render loop
     // -----------
-    while (!glfwWindowShouldClose(scene_manager.current_scene->scene_window))
+    while (!glfwWindowShouldClose(scene->scene_window))
     {
-        scene_manager.current_scene->Update();
+        processInput(scene->scene_window);
         
-        scene_manager.current_scene->Render();
+        scene->Update();
+        
+        scene->Render();
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
-        glfwSwapBuffers(scene_manager.current_scene->scene_window);
+        glfwSwapBuffers(scene->scene_window);
         glfwPollEvents();
     }
 
@@ -59,21 +61,25 @@ int main()
 // ---------------------------------------------------------------------------------------------------------
 void processInput(GLFWwindow *window)
 {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+
+    const auto& scene_manager = SceneManager::get();
+    
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        scene_manager.current_scene->camera.ProcessKeyboard(forward, scene_manager.current_scene->delta_time);
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        scene_manager.current_scene->camera.ProcessKeyboard(backward, scene_manager.current_scene->delta_time);
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        scene_manager.current_scene->camera.ProcessKeyboard(left, scene_manager.current_scene->delta_time);
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        scene_manager.current_scene->camera.ProcessKeyboard(right, scene_manager.current_scene->delta_time);
 }
 
-/*/ glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    // make sure the viewport matches the new window dimensions; note that width and 
-    // height will be significantly larger than specified on retina displays.
-    glViewport(0, 0, width, height);
-}*/
-
-// glfw: whenever the mouse moves, this callback is called
-// -------------------------------------------------------
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
+    const auto& scene_manager = SceneManager::get();
+    
     float xpos = static_cast<float>(xposIn);
     float ypos = static_cast<float>(yposIn);
 
@@ -90,12 +96,5 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
     lastX = xpos;
     lastY = ypos;
 
-    GameScene::camera.ProcessMouseMovement(xoffset, yoffset);
-}
-
-// glfw: whenever the mouse scroll wheel scrolls, this callback is called
-// ----------------------------------------------------------------------
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-{
-    GameScene::camera.ProcessMouseScroll(static_cast<float>(yoffset));
+    scene_manager.current_scene->camera.ProcessMouseMovement(xoffset, yoffset);
 }

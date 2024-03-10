@@ -23,7 +23,7 @@ public:
     //Delta time
     float delta_time = 0, last_frame = 0;
     //Camera
-    static Camera camera;
+    Camera camera;
     
     virtual ~Scene() = default;
     Scene(unsigned int in_width, unsigned int in_height);

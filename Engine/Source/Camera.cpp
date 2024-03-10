@@ -1,22 +1,28 @@
 ﻿#include "pch.h"
 #include "Camera.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 
-Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch): Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(speed), MouseSensitivity(sensitivity), Zoom(zoom)
+Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch, float roll):
+    Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(speed), MouseSensitivity(sensitivity), Zoom(zoom)
 {
     Position = position;
     WorldUp = up;
     Yaw = yaw;
     Pitch = pitch;
+    Roll = roll;
     updateCameraVectors();
 }
 
-Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch): Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(speed), MouseSensitivity(sensitivity), Zoom(zoom)
+Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch, float roll):
+    Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(speed), MouseSensitivity(sensitivity), Zoom(zoom)
 {
     Position = glm::vec3(posX, posY, posZ);
     WorldUp = glm::vec3(upX, upY, upZ);
     Yaw = yaw;
     Pitch = pitch;
+    Roll = roll;
     updateCameraVectors();
 }
 
@@ -33,9 +39,13 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
     if (direction == backward)
         Position -= Front * velocity;
     if (direction == left)
-        Position -= Right * velocity;
+        Roll -= 1.0f * deltaTime;
     if (direction == right)
-        Position += Right * velocity;
+        Roll += 1.0f * deltaTime;
+    const auto roll_mat = glm::rotate(glm::mat4(1.0f), glm::radians(Roll), Front);
+    Up = glm::mat3(roll_mat) * Up;
+
+    updateCameraVectors();
 }
 
 void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch)
@@ -43,7 +53,7 @@ void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constr
     xoffset *= MouseSensitivity;
     yoffset *= MouseSensitivity;
 
-    Yaw   += xoffset;
+    Yaw += xoffset;
     Pitch += yoffset;
 
     // make sure that when pitch is out of bounds, screen doesn't get flipped
@@ -59,15 +69,6 @@ void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constr
     updateCameraVectors();
 }
 
-void Camera::ProcessMouseScroll(float yoffset)
-{
-    Zoom -= (float)yoffset;
-    if (Zoom < 1.0f)
-        Zoom = 1.0f;
-    if (Zoom > 45.0f)
-        Zoom = 45.0f;
-}
-
 void Camera::updateCameraVectors()
 {
     // calculate the new Front vector
@@ -76,7 +77,11 @@ void Camera::updateCameraVectors()
     front.y = sin(glm::radians(Pitch));
     front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
     Front = glm::normalize(front);
-    // also re-calculate the Right and Up vector
-    Right = glm::normalize(glm::cross(Front, WorldUp));  // normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
-    Up    = glm::normalize(glm::cross(Right, Front));
+    //Get Roll Matrix
+    const auto roll_mat = glm::rotate(glm::mat4(1.0f), glm::radians(Roll), Front);
+    Up = glm::mat3(roll_mat) * Up;
+
+    Right = glm::mat3(roll_mat) * normalize(glm::cross(Front, WorldUp));
+    Up = glm::normalize(glm::cross(Right, Front));
+    Up = glm::mat3(roll_mat) * normalize(cross(Right, Front));
 }
