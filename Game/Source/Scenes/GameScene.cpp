@@ -1,8 +1,11 @@
 ﻿#include "GameScene.h"
 
+#include <glm/ext/matrix_clip_space.hpp>
+#include <glm/ext/matrix_transform.hpp>
+
 GameScene::GameScene(const unsigned int in_width, const unsigned int in_height): Scene(in_width, in_height),
-    default_shader("Shaders/Vertex/vertex.glsl", "Shaders/Fragment/fragment.glsl"),
-    guitar_backpack("Assets/Geometry/SkySphere/SkySphere.obj")
+                                                                                 default_shader("Shaders/Vertex/vertex.glsl", "Shaders/Fragment/fragment.glsl"),
+                                                                                 guitar_backpack("Assets/Geometry/SkySphere/SkySphere.obj")
 {
     //default_shader = Shader("Shaders/Vertex/vertex.glsl", "Shaders/Fragment/fragment.glsl");
     //guitar_backpack = Model("Assets/Geometry/Backpack/backpack.obj");
@@ -18,8 +21,8 @@ void GameScene::Render()
     default_shader.use();
 
     // view/projection transformations
-    glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)s_width / (float)s_height, 0.1f, 100.0f);
-    glm::mat4 view = camera.GetViewMatrix();
+    glm::mat4 projection = glm::perspective(glm::radians(90.0f), (float)s_width / (float)s_height, 0.1f, 100.0f);
+    glm::mat4 view = camera.getViewMatrix();
     default_shader.setMat4("projection", projection);
     default_shader.setMat4("view", view);
 

@@ -25,15 +25,21 @@ constexpr float speed = 0.5f;
 constexpr float sensitivity = 0.1f;
 constexpr float zoom = 45.0f;
 
-
 // An abstract camera class that processes input and calculates the corresponding Euler Angles, Vectors and Matrices for use in OpenGL
 class Camera
 {
+private:
+
+    glm::mat4 _model;
+    glm::mat4 _view;
+    glm::mat4 _projection;
+
+
 public:
-    void updateViewMatrix();
-    glm::mat4 viewMatrix;
+    //glm::mat4 viewMatrix;
     // camera Attributes
     glm::vec3 Position;
+    glm::vec3 WorldFront;
     glm::vec3 Front;
     glm::vec3 Up;
     glm::vec3 Right;
@@ -45,7 +51,7 @@ public:
     // camera options
     float MovementSpeed;
     float MouseSensitivity;
-    float Zoom;
+    glm::qua<float> Orientation;
 
     // constructor with vectors
     explicit Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = yaw, float pitch = pitch, float roll = roll);
@@ -64,7 +70,8 @@ public:
 
 private:
     // calculates the front vector from the Camera's (updated) Euler Angles
-    void updateCameraVectors();
+    void updateView();
     
 };
 #endif
+

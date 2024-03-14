@@ -6,6 +6,8 @@
 #include "../Engine/Source/Managers/SceneManager.h"
 
 #include "Source/Scenes/GameScene.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 //void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -67,13 +69,13 @@ void processInput(GLFWwindow *window)
     const auto& scene_manager = SceneManager::get();
     
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        scene_manager.current_scene->camera.ProcessKeyboard(forward, scene_manager.current_scene->delta_time);
+        scene_manager.current_scene->camera.moveForward(2.0f * scene_manager.current_scene->delta_time);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        scene_manager.current_scene->camera.ProcessKeyboard(backward, scene_manager.current_scene->delta_time);
+        scene_manager.current_scene->camera.moveForward(-2.0f * scene_manager.current_scene->delta_time);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        scene_manager.current_scene->camera.ProcessKeyboard(left, scene_manager.current_scene->delta_time);
+        scene_manager.current_scene->camera.turn(0.02f);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        scene_manager.current_scene->camera.ProcessKeyboard(right, scene_manager.current_scene->delta_time);
+        scene_manager.current_scene->camera.turn(-0.02f);
 }
 
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
@@ -96,5 +98,6 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
     lastX = xpos;
     lastY = ypos;
 
-    scene_manager.current_scene->camera.ProcessMouseMovement(xoffset, yoffset);
+    scene_manager.current_scene->camera.yaw(xoffset/20);
+    scene_manager.current_scene->camera.pitch(-yoffset/20);
 }

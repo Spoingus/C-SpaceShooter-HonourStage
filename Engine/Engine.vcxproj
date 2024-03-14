@@ -151,6 +151,7 @@
     <ClInclude Include="Source\Camera.h">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </ClInclude>
+    <ClInclude Include="Source\Camera2.h" />
     <ClInclude Include="Source\Components\Component.h" />
     <ClInclude Include="Source\Managers\ResourceManager.h" />
     <ClInclude Include="Source\Managers\SceneManager.h" />
@@ -172,6 +173,7 @@
     <ClCompile Include="Source\Camera.cpp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </ClCompile>
+    <ClCompile Include="Source\Camera2.cpp" />
     <ClCompile Include="Source\Components\Component.cpp" />
     <ClCompile Include="Source\Managers\ResourceManager.cpp" />
     <ClCompile Include="Source\Managers\SceneManager.cpp" />
