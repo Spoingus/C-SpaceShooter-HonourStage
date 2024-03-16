@@ -63,24 +63,27 @@ int main()
 // ---------------------------------------------------------------------------------------------------------
 void processInput(GLFWwindow *window)
 {
+    const auto& scene_manager = SceneManager::get();
+    auto& cam = scene_manager.current_scene->camera;
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
-    const auto& scene_manager = SceneManager::get();
+    
     
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        scene_manager.current_scene->camera.moveForward(2.0f * scene_manager.current_scene->delta_time);
+        cam.moveForward(1.2f * scene_manager.current_scene->delta_time);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        scene_manager.current_scene->camera.moveForward(-2.0f * scene_manager.current_scene->delta_time);
+        cam.moveForward(-1.2f * scene_manager.current_scene->delta_time);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        scene_manager.current_scene->camera.turn(0.02f);
+        cam.roll(-80.0f);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        scene_manager.current_scene->camera.turn(-0.02f);
+        cam.roll(80.0f);
 }
 
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
     const auto& scene_manager = SceneManager::get();
+    auto& cam = scene_manager.current_scene->camera;
     
     float xpos = static_cast<float>(xposIn);
     float ypos = static_cast<float>(yposIn);
@@ -98,6 +101,7 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
     lastX = xpos;
     lastY = ypos;
 
-    scene_manager.current_scene->camera.yaw(xoffset/20);
-    scene_manager.current_scene->camera.pitch(-yoffset/20);
+    cam.roll(xoffset);
+    cam.yaw(xoffset);
+    cam.pitch(-yoffset);
 }

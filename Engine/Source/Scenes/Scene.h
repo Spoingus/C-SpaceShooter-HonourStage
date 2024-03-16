@@ -3,7 +3,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "../../Source/Camera2.h"
+#include "..\Camera.h"
 #include "../Managers/SceneManager.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -23,7 +23,7 @@ public:
     //Delta time
     float delta_time = 0, last_frame = 0;
     //Camera
-    Camera2 camera;
+    Camera camera;
     
     virtual ~Scene() = default;
     Scene(unsigned int in_width, unsigned int in_height);
