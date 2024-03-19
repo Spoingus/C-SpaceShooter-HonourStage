@@ -8,6 +8,7 @@ class GameScene : public Scene
 public:
     Shader default_shader;
     Model guitar_backpack;
+    Model ground;
     
     ~GameScene() override = default;
     GameScene(unsigned int in_width, unsigned int in_height);

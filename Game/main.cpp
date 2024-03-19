@@ -71,9 +71,9 @@ void processInput(GLFWwindow *window)
     
     
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        cam.moveForward(1.2f * scene_manager.current_scene->delta_time);
+        cam.moveForward(4.0f * scene_manager.current_scene->delta_time);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        cam.moveForward(-1.2f * scene_manager.current_scene->delta_time);
+        cam.moveForward(-4.0f * scene_manager.current_scene->delta_time);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
         cam.roll(-80.0f);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
@@ -101,7 +101,7 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
     lastX = xpos;
     lastY = ypos;
 
-    cam.roll(xoffset);
-    cam.yaw(xoffset);
-    cam.pitch(-yoffset);
+    //cam.roll(xoffset);
+    cam.yaw(xoffset * 1.2f);
+    cam.pitch(-yoffset * 1.2f);
 }

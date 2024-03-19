@@ -141,30 +141,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Geometry\Backpack\ao.jpg" />
-    <Content Include="Assets\Geometry\Backpack\backpack.mtl" />
-    <Content Include="Assets\Geometry\Backpack\backpack.obj" />
-    <Content Include="Assets\Geometry\Backpack\diffuse.jpg" />
-    <Content Include="Assets\Geometry\Backpack\normal.png" />
-    <Content Include="Assets\Geometry\Backpack\roughness.jpg" />
-    <Content Include="Assets\Geometry\Backpack\source_attribution.txt" />
-    <Content Include="Assets\Geometry\Backpack\specular.jpg" />
-    <Content Include="Assets\Geometry\BarrelsTest\BarrelBump.jpeg">
+    <Content Include="Assets\Geometry\Ground\ground.mtl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Geometry\BarrelsTest\BarrelColour.jpeg">
+    <Content Include="Assets\Geometry\Ground\ground.obj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Geometry\BarrelsTest\BarrelSpecular.jpeg">
+    <Content Include="Assets\Geometry\Ground\normal2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Geometry\BarrelsTest\BarrelsTest.fbx">
+    <Content Include="Assets\Geometry\Ground\specular.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Geometry\BarrelsTest\BarrelsTest.mtl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Geometry\BarrelsTest\BarrelsTest.obj">
+    <Content Include="Assets\Geometry\Ground\texture3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Geometry\SkySphere\Sky.png" />
