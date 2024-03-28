@@ -14,17 +14,19 @@ public:
     
     Camera();
 
-    void pitch(float pitchDegrees);
+    void pitch(float pitch_degrees);
 
-    void yaw(float yawDegrees);
+    void yaw(float yaw_degrees);
 
-    void roll(float rollDegrees);
+    void roll(float roll_degrees);
 
-    void rotate(float angleDegrees, const glm::vec3& axis);
+    void rotate(float angle_degrees, const glm::vec3& axis);
 
     void rotate(const glm::quat& rotation);
 
     glm::vec3 get_position() const;
+
+    glm::quat get_orientation() const;
 
     glm::vec3 get_forward() const;
 
@@ -32,11 +34,13 @@ public:
 
     glm::vec3 get_up() const;
 
-    void moveForward(float movement);
+    void move_forward(float movement);
 
-    void moveLeft(float movement);
+    void move_left(float movement);
 
-    void moveUp(float movement);
+    void move_up(float movement);
+
+    void move_world_up(float movement);
 
     glm::mat4 get_view_matrix() const;
 };

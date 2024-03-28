@@ -6,8 +6,8 @@
 #include <vector>
 
 struct Vertex {
-    glm::vec3 Position, Normal, Tangent, Bitangent;
-    glm::vec2 TexCoords;
+    glm::vec3 position, normal, tangent, bi_tangent;
+    glm::vec2 tex_coords;
 };
 
 struct Texture {
@@ -21,13 +21,14 @@ public:
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
     std::vector<Texture> textures;
-    unsigned int VAO;
+    glm::vec3 diffuse;
+    unsigned int vao;
     
     Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, const std::vector<Texture>& textures);
     void Draw(const Shader &shader) const;
 
 private:
-    unsigned int VBO, EBO;
+    unsigned int vbo_, ebo_;
 
     void setup_mesh();
 };

@@ -7,24 +7,24 @@ Camera::Camera()
     orientation_ = normalize(orientation_);
 }
 
-void Camera::pitch(float pitchDegrees)
+void Camera::pitch(float pitch_degrees)
 {
-    rotate(glm::radians(pitchDegrees), glm::vec3(1.0f, 0.0f, 0.0f));
+    rotate(glm::radians(pitch_degrees), glm::vec3(1.0f, 0.0f, 0.0f));
 }
 
-void Camera::yaw(float yawDegrees)
+void Camera::yaw(float yaw_degrees)
 {
-    rotate(glm::radians(yawDegrees), glm::vec3(0.0f, 1.0f, 0.0f));
+    rotate(glm::radians(yaw_degrees), glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
-void Camera::roll(float rollDegrees)
+void Camera::roll(float roll_degrees)
 {
-    rotate(glm::radians(rollDegrees), glm::vec3(0.0f, 0.0f, 1.0f));
+    rotate(glm::radians(roll_degrees), glm::vec3(0.0f, 0.0f, 1.0f));
 }
 
-void Camera::rotate(float angleDegrees, const glm::vec3& axis)
+void Camera::rotate(float angle_degrees, const glm::vec3& axis)
 {
-    glm::quat q = glm::angleAxis(glm::radians(angleDegrees), axis);
+    glm::quat q = glm::angleAxis(glm::radians(angle_degrees), axis);
     rotate(q);
 }
 
@@ -37,6 +37,11 @@ void Camera::rotate(const glm::quat& rotation)
 glm::vec3 Camera::get_position() const
 {
     return position_;
+}
+
+glm::quat Camera::get_orientation() const
+{
+    return orientation_;
 }
 
 glm::vec3 Camera::get_forward() const
@@ -54,19 +59,24 @@ glm::vec3 Camera::get_up() const
     return glm::conjugate(orientation_) * glm::vec3(0.0f, 1.0f, 0.0f);
 }
 
-void Camera::moveForward(float movement)
+void Camera::move_forward(float movement)
 {
     position_ += get_forward() * movement;
 }
 
-void Camera::moveLeft(float movement)
+void Camera::move_left(float movement)
 {
     position_ += get_left() * movement;
 }
 
-void Camera::moveUp(float movement)
+void Camera::move_up(float movement)
 {
     position_ += get_up() * movement;
+}
+
+void Camera::move_world_up(float movement)
+{
+    position_ += glm::vec3(0.0f, 1.0f, 0.0f) * movement;
 }
 
 glm::mat4 Camera::get_view_matrix() const

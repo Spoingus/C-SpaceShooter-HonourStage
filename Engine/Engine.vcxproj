@@ -144,12 +144,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Source\Assets\Audio.h" />
     <ClInclude Include="Source\Assets\Mesh.h" />
     <ClInclude Include="Source\Assets\Model.h" />
     <ClInclude Include="Source\Assets\Shader.h" />
     <ClInclude Include="Source\Camera.h" />
-    <ClInclude Include="Source\Components\Component.h" />
+    <ClInclude Include="Source\Managers\CollisionManager.h" />
     <ClInclude Include="Source\Managers\ResourceManager.h" />
     <ClInclude Include="Source\Managers\SceneManager.h" />
     <ClInclude Include="Source\Objects\Actor.h" />
@@ -163,12 +162,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Source\Assets\Audio.cpp" />
     <ClCompile Include="Source\Assets\Mesh.cpp" />
     <ClCompile Include="Source\Assets\Model.cpp" />
     <ClCompile Include="Source\Assets\Shader.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
-    <ClCompile Include="Source\Components\Component.cpp" />
+    <ClCompile Include="Source\Managers\CollisionManager.cpp" />
     <ClCompile Include="Source\Managers\ResourceManager.cpp" />
     <ClCompile Include="Source\Managers\SceneManager.cpp" />
     <ClCompile Include="Source\Objects\Actor.cpp" />

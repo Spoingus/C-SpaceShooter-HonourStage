@@ -1,25 +1,14 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
-#include "../Engine/Source/Assets/Shader.h"
-#include "../Engine/Source/Assets/Model.h"
 #include "../Engine/Source/Managers/SceneManager.h"
-
 #include "Source/Scenes/GameScene.h"
-#define _USE_MATH_DEFINES
-#include <math.h>
 
-//void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void processInput(GLFWwindow *window);
 
 // settings
-const unsigned int SCR_WIDTH = 1920;
-const unsigned int SCR_HEIGHT = 1080;
-
-float lastX = SCR_WIDTH / 2.0f;
-float lastY = SCR_HEIGHT / 2.0f;
-bool firstMouse = true;
+constexpr unsigned int scr_width = 1920;
+constexpr unsigned int scr_height = 1080;
 
 // timing
 float deltaTime = 0.0f;
@@ -29,79 +18,38 @@ int main()
 {
     auto& scene_manager = SceneManager::get();
     //Load scene and check for GLFW / GLAD errors
-    GameScene game(SCR_WIDTH, SCR_HEIGHT);
+    GameScene game(scr_width, scr_height);
     scene_manager.set_scene(&game);
 
-    auto& scene = scene_manager.current_scene;
+    const auto& scene = scene_manager.current_scene;
     
     if (scene->loading_failed) return -1;
     glfwSetCursorPosCallback(scene_manager.current_scene->scene_window, mouse_callback);
     
     // render loop
-    // -----------
     while (!glfwWindowShouldClose(scene->scene_window))
     {
         processInput(scene->scene_window);
         
-        scene->Update();
+        scene->update();
         
-        scene->Render();
-
-        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
+        scene->render();
+        
         glfwSwapBuffers(scene->scene_window);
         glfwPollEvents();
     }
-
-    // glfw: terminate, clearing all previously allocated GLFW resources.
-    // ------------------------------------------------------------------
     glfwTerminate();
     return 0;
 }
 
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
 void processInput(GLFWwindow *window)
 {
     const auto& scene_manager = SceneManager::get();
-    auto& cam = scene_manager.current_scene->camera;
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-
-    
-    
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        cam.moveForward(4.0f * scene_manager.current_scene->delta_time);
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        cam.moveForward(-4.0f * scene_manager.current_scene->delta_time);
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        cam.roll(-80.0f);
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        cam.roll(80.0f);
+    scene_manager.current_scene->handle_input(window);
 }
 
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
     const auto& scene_manager = SceneManager::get();
-    auto& cam = scene_manager.current_scene->camera;
-    
-    float xpos = static_cast<float>(xposIn);
-    float ypos = static_cast<float>(yposIn);
-
-    if (firstMouse)
-    {
-        lastX = xpos;
-        lastY = ypos;
-        firstMouse = false;
-    }
-
-    float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
-
-    lastX = xpos;
-    lastY = ypos;
-
-    //cam.roll(xoffset);
-    cam.yaw(xoffset * 1.2f);
-    cam.pitch(-yoffset * 1.2f);
+    scene_manager.current_scene->handle_mouse(xposIn,yposIn);
 }

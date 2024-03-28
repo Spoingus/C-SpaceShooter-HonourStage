@@ -1,7 +1,0 @@
-A:\C-SpaceShooter-HonourStage\x64\Debug\Assets\Geometry\Ground\ground.mtl
-A:\C-SpaceShooter-HonourStage\x64\Debug\Assets\Geometry\Ground\ground.obj
-A:\C-SpaceShooter-HonourStage\x64\Debug\Assets\Geometry\Ground\normal2.png
-A:\C-SpaceShooter-HonourStage\x64\Debug\Assets\Geometry\Ground\specular.png
-A:\C-SpaceShooter-HonourStage\x64\Debug\Assets\Geometry\Ground\texture3.png
-A:\C-SpaceShooter-HonourStage\x64\Debug\Shaders\Fragment\fragment.glsl
-A:\C-SpaceShooter-HonourStage\x64\Debug\Shaders\Vertex\vertex.glsl

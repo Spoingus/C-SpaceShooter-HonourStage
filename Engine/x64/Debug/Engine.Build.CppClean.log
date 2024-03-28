@@ -7,12 +7,11 @@ a:\c-spaceshooter-honourstage\engine\x64\debug\scene.obj
 a:\c-spaceshooter-honourstage\engine\x64\debug\actor.obj
 a:\c-spaceshooter-honourstage\engine\x64\debug\scenemanager.obj
 a:\c-spaceshooter-honourstage\engine\x64\debug\resourcemanager.obj
-a:\c-spaceshooter-honourstage\engine\x64\debug\component.obj
+a:\c-spaceshooter-honourstage\engine\x64\debug\collisionmanager.obj
 a:\c-spaceshooter-honourstage\engine\x64\debug\camera.obj
 a:\c-spaceshooter-honourstage\engine\x64\debug\shader.obj
 a:\c-spaceshooter-honourstage\engine\x64\debug\model.obj
 a:\c-spaceshooter-honourstage\engine\x64\debug\mesh.obj
-a:\c-spaceshooter-honourstage\engine\x64\debug\audio.obj
 a:\c-spaceshooter-honourstage\x64\debug\engine.lib
 a:\c-spaceshooter-honourstage\engine\x64\debug\engine.tlog\cl.command.1.tlog
 a:\c-spaceshooter-honourstage\engine\x64\debug\engine.tlog\cl.items.tlog

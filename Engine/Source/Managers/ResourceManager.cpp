@@ -18,53 +18,46 @@
 Mesh ResourceManager::processMesh(aiMesh* mesh, const aiScene* scene, const std::string &directory)
 {
 	// data to fill
-    std::vector<Vertex> vertices;
-    std::vector<unsigned int> indices;
-    std::vector<Texture> textures;
+    std::vector<Vertex> vertices; std::vector<unsigned int> indices; std::vector<Texture> textures;
 
     // walk through each of the mesh's vertices
     for(unsigned int i = 0; i < mesh->mNumVertices; i++)
     {
         Vertex vertex;
-        glm::vec3 vector; // we declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
+        glm::vec3 vector; //Placeholder vector
         // positions
         vector.x = mesh->mVertices[i].x;
         vector.y = mesh->mVertices[i].y;
         vector.z = mesh->mVertices[i].z;
-        vertex.Position = vector;
+        vertex.position = vector;
         // normals
-        if (mesh->HasNormals())
-        {
+        if (mesh->HasNormals()) {
             vector.x = mesh->mNormals[i].x;
             vector.y = mesh->mNormals[i].y;
             vector.z = mesh->mNormals[i].z;
-            vertex.Normal = vector;
-        }
-        // texture coordinates
-        if(mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
-        {
+            vertex.normal = vector;}
+    	
+        if(mesh->mTextureCoords[0]){
             glm::vec2 vec;
-            // a vertex can contain up to 8 different texture coordinates. We thus make the assumption that we won't 
-            // use models where a vertex can have multiple texture coordinates so we always take the first set (0).
+        	//Texture-Coordinates
             vec.x = mesh->mTextureCoords[0][i].x; 
             vec.y = mesh->mTextureCoords[0][i].y;
-            vertex.TexCoords = vec;
+            vertex.tex_coords = vec;
             // tangent
             vector.x = mesh->mTangents[i].x;
             vector.y = mesh->mTangents[i].y;
             vector.z = mesh->mTangents[i].z;
-            vertex.Tangent = vector;
+            vertex.tangent = vector;
             // bi_tangent
             vector.x = mesh->mBitangents[i].x;
             vector.y = mesh->mBitangents[i].y;
             vector.z = mesh->mBitangents[i].z;
-            vertex.Bitangent = vector;
-        }
+            vertex.bi_tangent = vector;}
         else
-            vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+            vertex.tex_coords = glm::vec2(0.0f, 0.0f);
 
-        vertices.push_back(vertex);
-    }
+        vertices.push_back(vertex);}
+	
     // now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
     for(unsigned int i = 0; i < mesh->mNumFaces; i++)
     {
@@ -75,7 +68,6 @@ Mesh ResourceManager::processMesh(aiMesh* mesh, const aiScene* scene, const std:
     }
     // process materials
     aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-
 	
     std::vector<Texture> diffuse_maps = load_material_textures(material, aiTextureType_DIFFUSE, "texture_diffuse", directory);
     textures.insert(textures.end(), diffuse_maps.begin(), diffuse_maps.end());
@@ -83,14 +75,17 @@ Mesh ResourceManager::processMesh(aiMesh* mesh, const aiScene* scene, const std:
     std::vector<Texture> specular_maps = load_material_textures(material, aiTextureType_SPECULAR, "texture_specular", directory);
     textures.insert(textures.end(), specular_maps.begin(), specular_maps.end());
 	
-    std::vector<Texture> normal_maps = load_material_textures(material, aiTextureType_HEIGHT, "texture_normal", directory);
+    std::vector<Texture> normal_maps = load_material_textures(material, aiTextureType_NORMALS, "texture_normal", directory);
     textures.insert(textures.end(), normal_maps.begin(), normal_maps.end());
 	
-    std::vector<Texture> height_maps = load_material_textures(material, aiTextureType_AMBIENT, "texture_height", directory);
+    std::vector<Texture> height_maps = load_material_textures(material, aiTextureType_HEIGHT, "texture_height", directory);
     textures.insert(textures.end(), height_maps.begin(), height_maps.end());
-    
-    // return a mesh object created from the extracted mesh data
-	return Mesh(vertices, indices, textures);
+	
+	aiColor3D color(0.f,0.f,0.f);
+	material->Get(AI_MATKEY_COLOR_DIFFUSE, color);
+	
+	auto new_mesh = Mesh(vertices, indices, textures); new_mesh.diffuse = glm::vec3(color.r,color.g,color.b);
+	return new_mesh;
 }
 
 bool ResourceManager::model_loaded(const std::string& directory)
@@ -140,7 +135,7 @@ std::vector<Texture> ResourceManager::load_material_textures(const aiMaterial* m
 	return textures;
 }
 
-unsigned ResourceManager::texture_from_file(const char* path, const std::string& directory)
+unsigned int ResourceManager::texture_from_file(const char* path, const std::string& directory)
 {
 	std::string filename = std::string(path);
 	filename = directory + '/' + filename;

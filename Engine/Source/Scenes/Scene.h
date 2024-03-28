@@ -24,13 +24,21 @@ public:
     float delta_time = 0, last_frame = 0;
     //Camera
     Camera camera;
+    unsigned int width = 1920;
+    unsigned int height = 1080;
+
+    float last_x = static_cast<float>(width) / 2.0f;
+    float last_y = static_cast<float>(height) / 2.0f;
+    bool first_mouse = true;
     
     virtual ~Scene() = default;
-    Scene(unsigned int in_width, unsigned int in_height);
+    Scene(const char* title, unsigned int in_width, unsigned int in_height);
     
-    virtual void Render() = 0;
-    virtual void Update() = 0;
-    virtual void Close() = 0;
+    virtual void render() = 0;
+    virtual void update() = 0;
+    virtual void close() = 0;
+    virtual void handle_input(GLFWwindow *window) = 0;
+    virtual void handle_mouse(double xposIn, double yposIn) = 0;
 
     static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 };
