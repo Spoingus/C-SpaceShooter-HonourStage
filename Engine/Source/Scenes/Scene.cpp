@@ -3,8 +3,6 @@
 
 #include <stb_image.h>
 
-//Camera Scene::camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
-
 Scene::Scene(const char* title,unsigned in_width, unsigned in_height): s_width(in_width), s_height(in_height)
 {
     auto titles = "Failed to create GLFW window";

@@ -3,7 +3,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "..\Camera.h"
 #include "../Managers/SceneManager.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -22,13 +21,9 @@ public:
     unsigned int s_width, s_height;
     //Delta time
     float delta_time = 0, last_frame = 0;
-    //Camera
-    Camera camera;
-    unsigned int width = 1920;
-    unsigned int height = 1080;
-
-    float last_x = static_cast<float>(width) / 2.0f;
-    float last_y = static_cast<float>(height) / 2.0f;
+    
+    float last_x = static_cast<float>(s_width) / 2.0f;
+    float last_y = static_cast<float>(s_height) / 2.0f;
     bool first_mouse = true;
     
     virtual ~Scene() = default;

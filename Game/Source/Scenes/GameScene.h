@@ -2,6 +2,7 @@
 #include "../../../Engine/Source/Scenes/Scene.h"
 #include "../../Engine/Source/Assets/Shader.h"
 #include "../../Engine/Source/Assets/Model.h"
+#include "../ActorTypes/PlayerActor.h"
 
 class GameScene : public Scene
 {
@@ -10,14 +11,8 @@ public:
     Shader sky_shader;
     Model sky_sphere;
     Model ground;
-    Model ship;
     Model enemy_ship;
-
-    float ship_speed = 0;
-    float turn_speed = 0;
-
-    void increment_ship_speed();
-    void lower_ship_speed();
+    PlayerActor player_actor;
 
     ~GameScene() override = default;
     GameScene(unsigned int in_width, unsigned int in_height);
