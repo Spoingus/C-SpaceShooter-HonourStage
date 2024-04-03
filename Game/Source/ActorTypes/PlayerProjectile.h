@@ -7,7 +7,7 @@ class PlayerProjectile : public Actor
 {
 public:
 
-    float projectile_speed = 20.0f;
+    float projectile_speed = 3.4f;
     float projectile_radius = 5.0f;
     glm::vec3 actor_forward;
     
@@ -17,5 +17,5 @@ public:
     }
 
     void move_projectile(float movement);
-    void check_hit_enemy(EnemyActor enemy);
+    //void check_hit_enemy(EnemyActor enemy);
 };

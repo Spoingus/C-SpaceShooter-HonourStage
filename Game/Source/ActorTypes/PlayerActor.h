@@ -9,9 +9,14 @@ class PlayerActor : public Actor
 {
 public:
     int player_lives;
+    float player_max_speed = 2;
+    float player_max_turn = 2;
+    float roll_speed = 10;
     float ship_speed = 0;
     float turn_speed = 0;
     float player_radius = 10.0f;
+    int weapon_delay = 120;
+    bool gun_one = true;
     //Camera
     Camera player_camera;
     Model player_model;

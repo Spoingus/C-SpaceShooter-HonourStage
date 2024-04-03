@@ -1,0 +1,11 @@
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\pch.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\pch.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Assets\Mesh.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\Mesh.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Assets\Model.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\Model.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Assets\Shader.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\Shader.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Camera.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\Camera.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Managers\CollisionManager.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\CollisionManager.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Managers\ResourceManager.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\ResourceManager.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Managers\SceneManager.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\SceneManager.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Objects\Actor.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\Actor.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Scenes\Scene.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\Scene.obj
+C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\Source\Singleton.cpp;C:\Users\jackb\Downloads\C-SpaceShooter-HonourStage\Engine\x64\Debug\Singleton.obj

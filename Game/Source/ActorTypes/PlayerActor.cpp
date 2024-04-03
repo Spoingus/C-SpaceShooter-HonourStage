@@ -5,13 +5,28 @@
 
 void PlayerActor::weapon_fire()
 {
-    
-    projectiles.push_back(*new PlayerProjectile(player_camera.get_forward(), player_camera.get_position(),
-                                                  glm::conjugate(player_camera.get_orientation())));
+    if(weapon_delay == 120)
+    {
+        weapon_delay = 119;
+        glm::vec3 temp_position = player_camera.get_position() - player_camera.get_up() * 1.6f;
+        
+        if(gun_one)
+            temp_position -= player_camera.get_left();
+        else
+            temp_position += player_camera.get_left();
+        
+        temp_position += player_camera.get_forward() * 10.0f;
+        
+        projectiles.push_back(*new PlayerProjectile(player_camera.get_forward(),
+            temp_position,glm::conjugate(player_camera.get_orientation())));
+    }
+    gun_one = !gun_one;
 }
 
 void PlayerActor::update_projectiles(float delta_time)
 {
+    if(weapon_delay < 120) weapon_delay--;
+    if(weapon_delay == 0) weapon_delay = 120;
     if(!projectiles.empty())
     {
         for (auto& projectile : projectiles)
@@ -25,35 +40,35 @@ void PlayerActor::render_projectiles(const Shader &shader) const
 {
     if(!projectiles.empty())
     {
-            for (auto projectile : projectiles)
-            {
-                auto model = glm::mat4(1.0f);
-                model = glm::translate(model, projectile.get_position());
-                model *= glm::mat4_cast(projectile.get_orientation());
-                shader.setMat4("model", model);
-                projectile_model.Draw(shader);
-            }
+        for (const auto& projectile : projectiles)
+        {
+            auto model = glm::mat4(1.0f);
+            model = glm::translate(model, projectile.get_position());
+            model *= glm::mat4_cast(projectile.get_orientation());
+            shader.setMat4("model", model);
+            projectile_model.Draw(shader);
+        }
     }
 }
 
 void PlayerActor::increment_ship_speed()
 {
-    ship_speed += 0.1f;
+    ship_speed += 0.01f;
     turn_speed -= 0.05f;
-    if(ship_speed > 8.0f)
-        ship_speed = 8.0f;
+    if(ship_speed > player_max_speed)
+        ship_speed = player_max_speed;
     if(turn_speed < 1.0f)
         turn_speed = 1.0f;
 }
 
 void PlayerActor::lower_ship_speed()
 {
-    ship_speed -= 0.1f;
+    ship_speed -= 0.01f;
     turn_speed += 0.05f;
     if(ship_speed < 0.0f)
         ship_speed = 0.0f;
-    if(turn_speed > 2.0f)
-        turn_speed = 2.0f;
+    if(turn_speed > player_max_turn)
+        turn_speed = player_max_turn;
 }
 
 void PlayerActor::player_move(const Model& ground, float delta_time)

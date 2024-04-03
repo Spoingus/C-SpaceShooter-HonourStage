@@ -18,9 +18,6 @@ GameScene::GameScene(const unsigned int in_width, const unsigned int in_height):
 
 void GameScene::render()
 {
-    auto &resource_manager = ResourceManager::get();
-    // render
-    // ------
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -49,8 +46,6 @@ void GameScene::render()
     default_shader.setVec3("view_pos",player_actor.player_camera.get_position());
     ground.Draw(default_shader);
     //enemy_ship.Draw(default_shader);
-    //player_actor.projectile_model.Draw(default_shader);
-    //player_actor.player_model.Draw(default_shader);
 
     //render the ship
     glm::mat4 ship_model = glm::mat4(1);
@@ -84,7 +79,7 @@ void GameScene::handle_input(GLFWwindow* window)
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
     
-    if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
+    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
         player_actor.weapon_fire();
     
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
@@ -92,15 +87,13 @@ void GameScene::handle_input(GLFWwindow* window)
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         player_actor.lower_ship_speed();
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        player_actor.player_camera.roll(-80.0f);
+        player_actor.player_camera.roll(-player_actor.roll_speed);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        player_actor.player_camera.roll(80.0f);
+        player_actor.player_camera.roll(player_actor.roll_speed);
 }
 
 void GameScene::handle_mouse(double xposIn, double yposIn)
 {
-    const auto& scene_manager = SceneManager::get();
-
     const float x_pos = static_cast<float>(xposIn);
     const float y_pos = static_cast<float>(yposIn);
 
