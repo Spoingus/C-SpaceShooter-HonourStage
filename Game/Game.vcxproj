@@ -132,7 +132,9 @@
   <ItemGroup>
     <ClCompile Include="..\Dependencies\src\glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Source\ActorTypes\EnemyActor.cpp" />
     <ClCompile Include="Source\ActorTypes\PlayerActor.cpp" />
+    <ClCompile Include="Source\ActorTypes\PlayerProjectile.cpp" />
     <ClCompile Include="Source\Scenes\GameScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +168,15 @@
     <Content Include="Assets\Geometry\Ground\texture3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Geometry\Projectile\laser1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Geometry\Projectile\Projectile.mtl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Geometry\Projectile\Projectile.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Geometry\Ship\Albedo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -195,7 +206,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\ActorTypes\EnemyActor.h" />
     <ClInclude Include="Source\ActorTypes\PlayerActor.h" />
+    <ClInclude Include="Source\ActorTypes\PlayerProjectile.h" />
     <ClInclude Include="Source\Scenes\GameScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

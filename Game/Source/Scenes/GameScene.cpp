@@ -12,7 +12,7 @@ GameScene::GameScene(const unsigned int in_width, const unsigned int in_height):
     sky_sphere("Assets/Geometry/SkySphere/SkySphere.obj"),
     ground("Assets/Geometry/Ground/ground.obj"),
     enemy_ship("Assets/Geometry/EnemyShip/enemy_ship.obj"),
-    player_actor("player",glm::vec3(0,0,0),glm::quat(0,0,0,1))
+    player_actor(glm::vec3(0,0,0),glm::quat(0,0,0,1))
 {
 }
 
@@ -48,7 +48,9 @@ void GameScene::render()
     default_shader.setMat4("view", view);
     default_shader.setVec3("view_pos",player_actor.player_camera.get_position());
     ground.Draw(default_shader);
-    enemy_ship.Draw(default_shader);
+    //enemy_ship.Draw(default_shader);
+    //player_actor.projectile_model.Draw(default_shader);
+    //player_actor.player_model.Draw(default_shader);
 
     //render the ship
     glm::mat4 ship_model = glm::mat4(1);
@@ -56,6 +58,9 @@ void GameScene::render()
     ship_model *= glm::mat4_cast(glm::conjugate(player_actor.player_camera.get_orientation()));
     default_shader.setMat4("model", ship_model);
     player_actor.player_model.Draw(default_shader);
+    
+
+    player_actor.render_projectiles(default_shader);
 }
 
 void GameScene::update()
@@ -66,7 +71,8 @@ void GameScene::update()
     last_frame = current_frame;
     delta_time += 1;
 
-    player_actor.player_world_check(ground,delta_time);
+    player_actor.player_move(ground,delta_time);
+    player_actor.update_projectiles(delta_time);
 }
 
 void GameScene::close()
@@ -77,6 +83,9 @@ void GameScene::handle_input(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+    
+    if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
+        player_actor.weapon_fire();
     
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         player_actor.increment_ship_speed();

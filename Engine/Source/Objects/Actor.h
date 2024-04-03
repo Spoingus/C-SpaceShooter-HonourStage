@@ -16,8 +16,9 @@ public:
 
     std::string get_name(){return actor_name_;}
     glm::vec3 get_position() const {return actor_position_;}
+    glm::quat get_orientation() const {return actor_orientation_;}
 
-private:
+protected:
     std::string actor_name_;
     glm::vec3 actor_position_;
     glm::quat actor_orientation_;

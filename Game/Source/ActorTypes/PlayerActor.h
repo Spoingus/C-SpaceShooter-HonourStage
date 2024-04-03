@@ -1,27 +1,37 @@
 ﻿#pragma once
+#include "PlayerProjectile.h"
 #include "../../../Engine/Source/Objects/Actor.h"
 #include "../../Engine/Source/Assets/Shader.h"
 #include "../../Engine/Source/Assets/Model.h"
 #include "../../Engine/Source/Camera.h"
 
-class PlayerActor : Actor
+class PlayerActor : public Actor
 {
 public:
     int player_lives;
     float ship_speed = 0;
     float turn_speed = 0;
+    float player_radius = 10.0f;
     //Camera
     Camera player_camera;
     Model player_model;
+    Model projectile_model;
+
+    std::vector<PlayerProjectile> projectiles;
     
-    PlayerActor(const std::string& actor_name, const glm::vec3& actor_position, const glm::quat& actor_orientation)
-        : Actor(actor_name, actor_position, actor_orientation), player_lives(3),
-          player_model("Assets/Geometry/Ship/ship.obj")
+    PlayerActor(const glm::vec3& actor_position, const glm::quat& actor_orientation)
+        : Actor("Player Actor", actor_position, actor_orientation), player_lives(3),
+          player_model("Assets/Geometry/Ship/ship.obj"), projectile_model("Assets/Geometry/Projectile/Projectile.obj")
     {
     }
+
+    void weapon_fire();
+    void update_projectiles(float delta_time);
+    void render_projectiles(const Shader &shader) const;
+
     void increment_ship_speed();
     void lower_ship_speed();
 
-    void player_world_check(const Model& ground, float delta_time);
+    void player_move(const Model& ground, float delta_time);
     
 };
