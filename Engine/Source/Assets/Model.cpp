@@ -14,7 +14,10 @@ Model::Model(std::string const& path, bool gamma): gamma_correction(gamma)
     if(!resource_manager.model_loaded(directory))
         loadModel(path);
     else
+    {
         std::cout << "ERROR::Existing Model At::" << path << "\n";
+    }
+        
 }
 
 void Model::Draw(const Shader& shader) const

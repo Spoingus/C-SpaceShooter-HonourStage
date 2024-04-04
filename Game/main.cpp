@@ -16,6 +16,7 @@ float lastFrame = 0.0f;
 
 int main()
 {
+    
     auto& scene_manager = SceneManager::get();
     //Load scene and check for GLFW / GLAD errors
     GameScene game(scr_width, scr_height);

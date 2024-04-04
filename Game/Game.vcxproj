@@ -135,6 +135,8 @@
     <ClCompile Include="Source\ActorTypes\EnemyActor.cpp" />
     <ClCompile Include="Source\ActorTypes\PlayerActor.cpp" />
     <ClCompile Include="Source\ActorTypes\PlayerProjectile.cpp" />
+    <ClCompile Include="Source\Behaviours\RandomWayPointBehaviour.cpp" />
+    <ClCompile Include="Source\Managers\EnemyManager.cpp" />
     <ClCompile Include="Source\Scenes\GameScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +211,8 @@
     <ClInclude Include="Source\ActorTypes\EnemyActor.h" />
     <ClInclude Include="Source\ActorTypes\PlayerActor.h" />
     <ClInclude Include="Source\ActorTypes\PlayerProjectile.h" />
+    <ClInclude Include="Source\Behaviours\RandomWayPointBehaviour.h" />
+    <ClInclude Include="Source\Managers\EnemyManager.h" />
     <ClInclude Include="Source\Scenes\GameScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

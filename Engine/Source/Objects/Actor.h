@@ -7,19 +7,22 @@
 class Actor
 {
 public:
-    Actor(const std::string& actor_name, const glm::vec3& actor_position, const glm::quat& actor_orientation)
-        : actor_name_(actor_name),
-          actor_position_(actor_position),
-          actor_orientation_(actor_orientation)
+    Actor(const std::string& name, const glm::vec3& position, const glm::vec3 velocity, const glm::quat& orientation)
+        : name_(name),
+    position_(position),
+    velocity_(velocity),
+    orientation_(orientation)
     {
     }
 
-    std::string get_name(){return actor_name_;}
-    glm::vec3 get_position() const {return actor_position_;}
-    glm::quat get_orientation() const {return actor_orientation_;}
+    std::string get_name(){return name_;}
+    glm::vec3 get_position() const {return position_;}
+    glm::vec3 get_velocity() const {return velocity_;}
+    glm::quat get_orientation() const {return orientation_;}
 
 protected:
-    std::string actor_name_;
-    glm::vec3 actor_position_;
-    glm::quat actor_orientation_;
+    std::string name_;
+    glm::vec3 position_;
+    glm::vec3 velocity_;
+    glm::quat orientation_;
 };

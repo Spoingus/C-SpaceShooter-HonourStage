@@ -12,7 +12,7 @@ public:
     glm::vec3 actor_forward;
     
     PlayerProjectile(const glm::vec3 actor_forward,const glm::vec3& actor_position, const glm::quat& actor_orientation)
-        : Actor("Player Projectile", actor_position, actor_orientation), actor_forward(actor_forward)
+        : Actor("Player Projectile", actor_position, glm::vec3(0,0,0), actor_orientation), actor_forward(actor_forward)
     {
     }
 

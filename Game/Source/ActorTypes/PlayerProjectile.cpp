@@ -5,7 +5,7 @@
 
 void PlayerProjectile::move_projectile(float movement)
 {
-    actor_position_ += actor_forward * movement;
+    position_ += actor_forward * movement;
 }
 
 /*void PlayerProjectile::check_hit_enemy(EnemyActor enemy)

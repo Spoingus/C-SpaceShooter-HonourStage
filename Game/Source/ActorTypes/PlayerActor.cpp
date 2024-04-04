@@ -1,6 +1,4 @@
 ﻿#include "PlayerActor.h"
-
-#include "../../../Engine/Source/Camera.h"
 #include "../../../Engine/Source/Managers/CollisionManager.h"
 
 void PlayerActor::weapon_fire()
@@ -83,4 +81,14 @@ void PlayerActor::player_move(const Model& ground, float delta_time)
         ship_speed *= -1;
     }
     player_camera.move_forward(ship_speed * delta_time);
+}
+
+void PlayerActor::draw_player(Shader shader) const
+{
+    //render the ship
+    glm::mat4 ship_model = glm::mat4(1);
+    ship_model = glm::translate(ship_model, player_camera.get_position());
+    ship_model *= glm::mat4_cast(glm::conjugate(player_camera.get_orientation()));
+    shader.setMat4("model", ship_model);
+    player_model.Draw(shader);
 }

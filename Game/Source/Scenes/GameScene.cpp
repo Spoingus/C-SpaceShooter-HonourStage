@@ -2,7 +2,10 @@
 
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/matrix_transform.hpp>
+#include <glm/gtc/random.hpp>
+#include <random>
 
+#include "../../../Engine/Source/Managers/CollisionManager.h"
 #include "../../../Engine/Source/Managers/ResourceManager.h"
 
 GameScene::GameScene(const unsigned int in_width, const unsigned int in_height): Scene("C++ Space Shooter - Game",
@@ -10,10 +13,17 @@ GameScene::GameScene(const unsigned int in_width, const unsigned int in_height):
     default_shader("Shaders/Vertex/vertex.glsl", "Shaders/Fragment/fragment.glsl"),
     sky_shader("Shaders/Vertex/vertex.glsl", "Shaders/Fragment/sky_fragment.glsl"),
     sky_sphere("Assets/Geometry/SkySphere/SkySphere.obj"),
-    ground("Assets/Geometry/Ground/ground.obj"),
-    enemy_ship("Assets/Geometry/EnemyShip/enemy_ship.obj"),
-    player_actor(glm::vec3(0,0,0),glm::quat(0,0,0,1))
+    ground("Assets/Geometry/Ground/ground.obj"), enemy_ship("Assets/Geometry/EnemyShip/enemy_ship.obj"),
+    player_actor(glm::vec3(0, 0, 0), glm::quat(0, 0, 0, 1))
 {
+    std::mt19937 mersenne{std::random_device{}()};
+    std::uniform_real_distribution<float> dist{400,2400};
+    
+    for (int i = 0; i < enemy_count; ++i)
+    {
+        float my_random_number = dist(mersenne);
+        enemy_actors.emplace_back(enemy_ship, my_random_number);
+    }
 }
 
 void GameScene::render()
@@ -45,16 +55,14 @@ void GameScene::render()
     default_shader.setMat4("view", view);
     default_shader.setVec3("view_pos",player_actor.player_camera.get_position());
     ground.Draw(default_shader);
-    //enemy_ship.Draw(default_shader);
-
-    //render the ship
-    glm::mat4 ship_model = glm::mat4(1);
-    ship_model = glm::translate(ship_model, player_actor.player_camera.get_position());
-    ship_model *= glm::mat4_cast(glm::conjugate(player_actor.player_camera.get_orientation()));
-    default_shader.setMat4("model", ship_model);
-    player_actor.player_model.Draw(default_shader);
     
-
+    for (const auto& enemy : enemy_actors)
+    {
+        enemy.draw_enemy(default_shader);
+    }
+    
+    player_actor.draw_player(default_shader);
+    
     player_actor.render_projectiles(default_shader);
 }
 

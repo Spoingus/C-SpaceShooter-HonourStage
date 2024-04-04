@@ -3,6 +3,7 @@
 #include "../../Engine/Source/Assets/Shader.h"
 #include "../../Engine/Source/Assets/Model.h"
 #include "../ActorTypes/PlayerActor.h"
+#include <list>
 
 class GameScene : public Scene
 {
@@ -13,6 +14,11 @@ public:
     Model ground;
     Model enemy_ship;
     PlayerActor player_actor;
+    std::list<EnemyActor> enemy_actors;
+
+    int enemy_count = 25;
+    
+    
 
     ~GameScene() override = default;
     GameScene(unsigned int in_width, unsigned int in_height);

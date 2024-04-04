@@ -147,6 +147,8 @@
     <ClInclude Include="Source\Assets\Mesh.h" />
     <ClInclude Include="Source\Assets\Model.h" />
     <ClInclude Include="Source\Assets\Shader.h" />
+    <ClInclude Include="Source\Behaviours\BehaviourState.h" />
+    <ClInclude Include="Source\Behaviours\BehaviourStateMachine.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Managers\CollisionManager.h" />
     <ClInclude Include="Source\Managers\ResourceManager.h" />
@@ -165,6 +167,8 @@
     <ClCompile Include="Source\Assets\Mesh.cpp" />
     <ClCompile Include="Source\Assets\Model.cpp" />
     <ClCompile Include="Source\Assets\Shader.cpp" />
+    <ClCompile Include="Source\Behaviours\BehaviourState.cpp" />
+    <ClCompile Include="Source\Behaviours\BehaviourStateMachine.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Managers\CollisionManager.cpp" />
     <ClCompile Include="Source\Managers\ResourceManager.cpp" />
