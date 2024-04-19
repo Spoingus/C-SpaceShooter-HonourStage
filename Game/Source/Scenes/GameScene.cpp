@@ -4,26 +4,18 @@
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/gtc/random.hpp>
 #include <random>
-
-#include "../../../Engine/Source/Managers/CollisionManager.h"
 #include "../../../Engine/Source/Managers/ResourceManager.h"
+#include "../Managers/EnemyManager.h"
 
 GameScene::GameScene(const unsigned int in_width, const unsigned int in_height): Scene("C++ Space Shooter - Game",
-        in_width, in_height),
-    default_shader("Shaders/Vertex/vertex.glsl", "Shaders/Fragment/fragment.glsl"),
-    sky_shader("Shaders/Vertex/vertex.glsl", "Shaders/Fragment/sky_fragment.glsl"),
-    sky_sphere("Assets/Geometry/SkySphere/SkySphere.obj"),
-    ground("Assets/Geometry/Ground/ground.obj"), enemy_ship("Assets/Geometry/EnemyShip/enemy_ship.obj"),
-    player_actor(glm::vec3(0, 0, 0), glm::quat(0, 0, 0, 1))
+                                                                                       in_width, in_height),
+                                                                                 default_shader("Shaders/Vertex/vertex.glsl", "Shaders/Fragment/fragment.glsl"),
+                                                                                 sky_shader("Shaders/Vertex/vertex.glsl", "Shaders/Fragment/sky_fragment.glsl"),
+                                                                                 sky_sphere("Assets/Geometry/SkySphere/SkySphere.obj"),
+                                                                                 ground("Assets/Geometry/Ground/ground.obj"), enemy_ship("Assets/Geometry/EnemyShip/enemy_ship.obj"),
+                                                                                 player_actor(glm::vec3(0, 0, 0), glm::quat(0, 0, 0, 1))
 {
-    std::mt19937 mersenne{std::random_device{}()};
-    std::uniform_real_distribution<float> dist{400,2400};
-    
-    for (int i = 0; i < enemy_count; ++i)
-    {
-        float my_random_number = dist(mersenne);
-        enemy_actors.emplace_back(enemy_ship, my_random_number);
-    }
+    EnemyManager::get().initialise_enemies(enemy_ship);
 }
 
 void GameScene::render()
@@ -56,10 +48,7 @@ void GameScene::render()
     default_shader.setVec3("view_pos",player_actor.player_camera.get_position());
     ground.Draw(default_shader);
     
-    for (const auto& enemy : enemy_actors)
-    {
-        enemy.draw_enemy(default_shader);
-    }
+    EnemyManager::get().draw_enemies(default_shader);
     
     player_actor.draw_player(default_shader);
     
@@ -74,7 +63,7 @@ void GameScene::update()
     last_frame = current_frame;
     delta_time += 1;
 
-    player_actor.player_move(ground,delta_time);
+    EnemyManager::get().update_enemies(delta_time, player_actor.player_camera.get_position());
     player_actor.update_projectiles(delta_time);
 }
 
@@ -98,6 +87,8 @@ void GameScene::handle_input(GLFWwindow* window)
         player_actor.player_camera.roll(-player_actor.roll_speed);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         player_actor.player_camera.roll(player_actor.roll_speed);
+
+    player_actor.player_move(ground,delta_time);
 }
 
 void GameScene::handle_mouse(double xposIn, double yposIn)

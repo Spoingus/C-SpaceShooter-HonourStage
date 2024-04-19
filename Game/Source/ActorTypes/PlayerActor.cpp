@@ -1,5 +1,6 @@
 ﻿#include "PlayerActor.h"
 #include "../../../Engine/Source/Managers/CollisionManager.h"
+#include "../Managers/EnemyManager.h"
 
 void PlayerActor::weapon_fire()
 {
@@ -15,7 +16,7 @@ void PlayerActor::weapon_fire()
         
         temp_position += player_camera.get_forward() * 10.0f;
         
-        projectiles.push_back(*new PlayerProjectile(player_camera.get_forward(),
+        EnemyManager::get().current_projectiles.push_back(*new PlayerProjectile(player_camera.get_forward(),
             temp_position,glm::conjugate(player_camera.get_orientation())));
     }
     gun_one = !gun_one;
@@ -25,26 +26,32 @@ void PlayerActor::update_projectiles(float delta_time)
 {
     if(weapon_delay < 120) weapon_delay--;
     if(weapon_delay == 0) weapon_delay = 120;
+    auto &projectiles = EnemyManager::get().current_projectiles;
     if(!projectiles.empty())
-    {
         for (auto& projectile : projectiles)
         {
             projectile.move_projectile(projectile.projectile_speed * delta_time);
+            if(CollisionManager::check_world_sphere(projectile.get_position(),projectile.projectile_radius,3000))
+                projectile.has_hit = true;
         }
-    }
+            
 }
 
 void PlayerActor::render_projectiles(const Shader &shader) const
 {
+    const auto &projectiles = EnemyManager::get().current_projectiles;
     if(!projectiles.empty())
     {
         for (const auto& projectile : projectiles)
         {
-            auto model = glm::mat4(1.0f);
-            model = glm::translate(model, projectile.get_position());
-            model *= glm::mat4_cast(projectile.get_orientation());
-            shader.setMat4("model", model);
-            projectile_model.Draw(shader);
+            if(!projectile.has_hit)
+            {
+                auto model = glm::mat4(1.0f);
+                            model = glm::translate(model, projectile.get_position());
+                            model *= glm::mat4_cast(projectile.get_orientation());
+                            shader.setMat4("model", model);
+                            projectile_model.Draw(shader);
+            }
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include <list>
+
 #include "PlayerProjectile.h"
 #include "../../../Engine/Source/Objects/Actor.h"
 #include "../../Engine/Source/Assets/Shader.h"
@@ -8,6 +10,8 @@
 class PlayerActor : public Actor
 {
 public:
+    friend class EnemyManager;
+    
     int player_lives;
     float player_max_speed = 2;
     float player_max_turn = 2;
@@ -21,8 +25,6 @@ public:
     Camera player_camera;
     Model player_model;
     Model projectile_model;
-
-    std::vector<PlayerProjectile> projectiles;
     
     PlayerActor(const glm::vec3& actor_position, const glm::quat& actor_orientation)
         : Actor("Player Actor", actor_position, glm::vec3(0,0,0), actor_orientation), player_lives(3),

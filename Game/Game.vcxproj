@@ -138,6 +138,7 @@
     <ClCompile Include="Source\Behaviours\RandomWayPointBehaviour.cpp" />
     <ClCompile Include="Source\Managers\EnemyManager.cpp" />
     <ClCompile Include="Source\Scenes\GameScene.cpp" />
+    <ClCompile Include="Source\Scenes\MenuScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
@@ -214,6 +215,7 @@
     <ClInclude Include="Source\Behaviours\RandomWayPointBehaviour.h" />
     <ClInclude Include="Source\Managers\EnemyManager.h" />
     <ClInclude Include="Source\Scenes\GameScene.h" />
+    <ClInclude Include="Source\Scenes\MenuScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
