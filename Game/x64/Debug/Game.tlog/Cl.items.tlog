@@ -1,0 +1,9 @@
+A:\C-SpaceShooter-HonourStage\Dependencies\src\glad.c;A:\C-SpaceShooter-HonourStage\Game\x64\Debug\glad.obj
+A:\C-SpaceShooter-HonourStage\Game\main.cpp;A:\C-SpaceShooter-HonourStage\Game\x64\Debug\main.obj
+A:\C-SpaceShooter-HonourStage\Game\Source\ActorTypes\EnemyActor.cpp;A:\C-SpaceShooter-HonourStage\Game\x64\Debug\EnemyActor.obj
+A:\C-SpaceShooter-HonourStage\Game\Source\ActorTypes\PlayerActor.cpp;A:\C-SpaceShooter-HonourStage\Game\x64\Debug\PlayerActor.obj
+A:\C-SpaceShooter-HonourStage\Game\Source\ActorTypes\PlayerProjectile.cpp;A:\C-SpaceShooter-HonourStage\Game\x64\Debug\PlayerProjectile.obj
+A:\C-SpaceShooter-HonourStage\Game\Source\Behaviours\RandomWayPointBehaviour.cpp;A:\C-SpaceShooter-HonourStage\Game\x64\Debug\RandomWayPointBehaviour.obj
+A:\C-SpaceShooter-HonourStage\Game\Source\Managers\EnemyManager.cpp;A:\C-SpaceShooter-HonourStage\Game\x64\Debug\EnemyManager.obj
+A:\C-SpaceShooter-HonourStage\Game\Source\Scenes\GameScene.cpp;A:\C-SpaceShooter-HonourStage\Game\x64\Debug\GameScene.obj
+A:\C-SpaceShooter-HonourStage\Game\Source\Scenes\MenuScene.cpp;A:\C-SpaceShooter-HonourStage\Game\x64\Debug\MenuScene.obj

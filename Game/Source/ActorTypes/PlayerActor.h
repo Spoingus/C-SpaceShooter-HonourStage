@@ -13,7 +13,7 @@ public:
     friend class EnemyManager;
     
     int player_lives;
-    float player_max_speed = 2;
+    float player_max_speed = 1.2f;
     float player_max_turn = 2;
     float roll_speed = 10;
     float ship_speed = 0;

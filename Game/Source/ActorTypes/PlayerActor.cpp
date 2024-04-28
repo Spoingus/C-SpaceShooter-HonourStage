@@ -30,7 +30,7 @@ void PlayerActor::update_projectiles(float delta_time)
     if(!projectiles.empty())
         for (auto& projectile : projectiles)
         {
-            projectile.move_projectile(projectile.projectile_speed * delta_time);
+            projectile.move_projectile(projectile.projectile_speed);// * delta_time);
             if(CollisionManager::check_world_sphere(projectile.get_position(),projectile.projectile_radius,3000))
                 projectile.has_hit = true;
         }
@@ -58,7 +58,7 @@ void PlayerActor::render_projectiles(const Shader &shader) const
 
 void PlayerActor::increment_ship_speed()
 {
-    ship_speed += 0.01f;
+    ship_speed += 0.005f;
     turn_speed -= 0.05f;
     if(ship_speed > player_max_speed)
         ship_speed = player_max_speed;
@@ -68,7 +68,7 @@ void PlayerActor::increment_ship_speed()
 
 void PlayerActor::lower_ship_speed()
 {
-    ship_speed -= 0.01f;
+    ship_speed -= 0.005f;
     turn_speed += 0.05f;
     if(ship_speed < 0.0f)
         ship_speed = 0.0f;
@@ -80,14 +80,14 @@ void PlayerActor::player_move(const Model& ground, float delta_time)
 {
     if(CollisionManager::check_terrain(ship_speed, ground, player_camera.get_position(),player_radius))
     {
-        player_camera.move_world_up(ship_speed * delta_time);
-        player_camera.pitch(-150.0f * delta_time);
+        player_camera.move_world_up(ship_speed);// * delta_time);
+        player_camera.pitch(-150.0f);// * delta_time);
     }
     if(CollisionManager::check_world_sphere(player_camera.get_position(),player_radius,3000.0f))
     {
         ship_speed *= -1;
     }
-    player_camera.move_forward(ship_speed * delta_time);
+    player_camera.move_forward(ship_speed);// * delta_time);
 }
 
 void PlayerActor::draw_player(Shader shader) const

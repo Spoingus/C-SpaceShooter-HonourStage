@@ -13,7 +13,7 @@ constexpr unsigned int scr_height = 1080;
 
 int main()
 {
-    constexpr double fps_limit = 1.0 / 165.0; //Framerate base on monitor refresh rate
+    constexpr double fps_limit = 1.0 / 200.0; //Framerate base on monitor refresh rate
     double last_frame_time = 0;
     
     auto& scene_manager = SceneManager::get();
@@ -26,6 +26,8 @@ int main()
     
     if (scene->loading_failed) return -1;
     glfwSetCursorPosCallback(scene_manager.current_scene->scene_window, mouse_callback);
+
+    glfwSwapInterval(0);
     
     //Update Loop
     while (!glfwWindowShouldClose(scene->scene_window))

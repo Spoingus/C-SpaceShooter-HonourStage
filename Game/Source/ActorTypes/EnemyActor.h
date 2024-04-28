@@ -9,7 +9,7 @@ class EnemyActor : public Actor
 public:
     Model enemy_model;
 
-    float ship_speed = 0.5f;
+    float ship_speed = 0.25f;
     float collision_radius = 50.0f;
     bool is_dead = false;
     glm::vec3 target_position;

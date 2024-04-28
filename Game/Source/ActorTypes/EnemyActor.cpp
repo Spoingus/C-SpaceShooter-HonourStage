@@ -8,7 +8,7 @@ void EnemyActor::update(float delta_time)
     orientation_ = glm::quatLookAt(velocity_,glm::vec3(0,1,0));
     velocity_ += steering_force() * ship_speed;
     velocity_ = glm::clamp(velocity_,-ship_speed,ship_speed);
-    position_ += velocity_ * delta_time;
+    position_ += velocity_;// * delta_time;
 
     if(CollisionManager::check_spheres(position_,collision_radius,target_position,0.0f))
     {

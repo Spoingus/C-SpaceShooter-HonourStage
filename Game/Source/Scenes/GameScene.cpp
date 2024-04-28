@@ -63,8 +63,8 @@ void GameScene::update()
     last_frame = current_frame;
     delta_time += 1;
 
-    EnemyManager::get().update_enemies(delta_time, player_actor.player_camera.get_position());
-    player_actor.update_projectiles(delta_time);
+    EnemyManager::get().update_enemies(1.0f, player_actor.player_camera.get_position());
+    player_actor.update_projectiles(1.0f);
 }
 
 void GameScene::close()
