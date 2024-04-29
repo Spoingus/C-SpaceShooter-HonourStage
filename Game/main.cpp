@@ -13,7 +13,7 @@ constexpr unsigned int scr_height = 1080;
 
 int main()
 {
-    constexpr double fps_limit = 1.0 / 200.0; //Framerate base on monitor refresh rate
+    constexpr double fps_limit = 1.0 / 60.0; //Framerate base on monitor refresh rate
     double last_frame_time = 0;
     
     auto& scene_manager = SceneManager::get();
